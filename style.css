@@ -1,0 +1,16 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.col {
+    width: 250px;
+    background: red;
+    display: block;
+}
+
+.col-img-header {
+    border-radius: 5px 5px 0 0;
+    margin-bottom: 10px;
+}
