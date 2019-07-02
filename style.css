@@ -16,39 +16,45 @@ body {
     display: block;
 }
 
-.col-img-header {
-    width: 100%;
-    border-radius: 5px 5px 0 0;
+.col-header {
+    height: 150px;
     margin-bottom: 10px;
     position: relative;
 }
 
-.col-img-header::before {
-    content: '';
+.col-header::after {
     position: absolute;
+    content: '';
     width: 100%;
     height: 100%;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: linear-gradient(to bottom right,#002f4b,#dc4225);
-    opacity: 0.6; 
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 5px 5px 0 0;
+    background: linear-gradient(to bottom, rgba(44,44,64,0), rgba(44,44,64,0.8));
 }
+.col-header-img {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+
 
 .col-img-chanel{
     width: 40px;
     height: 40px;
 }
 .col-text {
-   display: flex;
-   justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .col-text-title {
     color: white;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 5px;
+    line-height: 0.75;
 }
 
 .col-text-chanel, 
