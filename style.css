@@ -21,6 +21,22 @@ body {
     margin-bottom: 10px;
     position: relative;
 }
+.loader {
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    bottom: 0;
+    background: white;
+    opacity: 0.8;
+}
+.loader-bar {
+    position: absolute;
+    width: 100%;
+    background: red;
+    display: inline-block;
+    height: 2px;
+    animation: progress 3s ease-in-out forwards;
+}
 
 .col-header::before {
     position: absolute;
@@ -51,10 +67,19 @@ body {
     color: white;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 5px;
-    line-height: 0.75;
+    line-height: 0.7;
 }
 
 .col-text-chanel, 
 .col-text-category {
     color: rgba(255,255,255, 0.5);;
 }
+
+@keyframes progress {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
