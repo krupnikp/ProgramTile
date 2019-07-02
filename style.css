@@ -13,7 +13,7 @@ body {
 .col {
     width: 250px;
     background: rgb(44, 44, 64);
-    display: block;
+    margin: 40px;
 }
 
 .col-header {
@@ -22,15 +22,13 @@ body {
     position: relative;
 }
 
-.col-header::after {
+.col-header::before {
     position: absolute;
     content: '';
     width: 100%;
     height: 100%;
     top: 0;
     right: 0;
-    bottom: 0;
-    left: 0;
     border-radius: 5px 5px 0 0;
     background: linear-gradient(to bottom, rgba(44,44,64,0), rgba(44,44,64,0.8));
 }
@@ -40,8 +38,7 @@ body {
     border-radius: 5px 5px 0 0;
 }
 
-
-.col-img-chanel{
+.col-text-img{
     width: 40px;
     height: 40px;
 }
