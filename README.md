@@ -20,3 +20,4 @@ Dalej za pomocą HTML/CSS do zrobienia:
     po obrazkiem animacja progress baru (1px wysokości, 100% szerokości, do użycia animacja css)
     animacja bez powtórzeń
     kolor wypełnienia czerwony
+    stworzyć merge request
