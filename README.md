@@ -21,3 +21,15 @@ Dalej za pomocą HTML/CSS do zrobienia:
     animacja bez powtórzeń
     kolor wypełnienia czerwony
     stworzyć merge request
+
+## Część 3
+
+Hello JavaScript:
+
+	zamimplamentować badge z timerem olicząjącym ile minut zostało do rozpoczęcia programu:
+	- funkcja przyyjmuje start (timestamp)
+	- plakietka pojawia się, gdy do rozpoczęcia programu jest >= 10 min'
+	- na plakietce czas do rozpoczecia programu jest pokazywany z dokładnościa co do minuty
+	- jeżeli program juz się rozpoczął na plakietce pojawia się napis 'trwa'
+	- na plakiecte widnieje napis `Start za: x min`
+
