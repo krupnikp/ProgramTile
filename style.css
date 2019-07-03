@@ -31,11 +31,10 @@ body {
 }
 .loader-bar {
     position: absolute;
-    width: 100%;
     background: red;
     display: inline-block;
     height: 2px;
-    animation: progress 3s ease-in-out forwards;
+    animation: progress 3s linear forwards;
 }
 
 .col-header::before {
