@@ -56,6 +56,11 @@ body {
 .col-header-timer {
     position: absolute;
     bottom: 10px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 9px;
+    padding: 0 5px;
 }
 
 .col-text-img{
@@ -76,7 +81,7 @@ body {
 
 .col-text-chanel, 
 .col-text-category {
-    color: rgba(255,255,255, 0.5);;
+    color: rgba(255,255,255, 0.5);
 }
 
 @keyframes progress {
