@@ -53,6 +53,11 @@ body {
     border-radius: 5px 5px 0 0;
 }
 
+.col-header-timer {
+    position: absolute;
+    bottom: 10px;
+}
+
 .col-text-img{
     width: 40px;
     height: 40px;
