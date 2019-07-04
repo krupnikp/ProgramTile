@@ -21,21 +21,6 @@ body {
     margin-bottom: 10px;
     position: relative;
 }
-.loader {
-    position: absolute;
-    height: 2px;
-    width: 100%;
-    bottom: 0;
-    background: white;
-    opacity: 0.8;
-}
-.loader-bar {
-    position: absolute;
-    background: red;
-    display: inline-block;
-    height: 2px;
-    animation: progress 3s linear forwards;
-}
 
 .col-header::before {
     position: absolute;
@@ -56,11 +41,27 @@ body {
 .col-header-timer {
     position: absolute;
     bottom: 10px;
-    border-radius: 5px;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-size: 9px;
-    padding: 0 5px;
+    border-radius: 3px;
+    background: rgb(44, 44, 64);
+    color: rgba(255,255,255, 0.5);
+    padding: 0 6px;
+    margin-left: 5px; 
+}
+
+.loader {
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    bottom: 0;
+    background: white;
+    opacity: 0.8;
+}
+.loader-bar {
+    position: absolute;
+    background: red;
+    display: inline-block;
+    height: 2px;
+    animation: progress 3s linear forwards;
 }
 
 .col-text-img{
