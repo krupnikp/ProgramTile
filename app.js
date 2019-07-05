@@ -6,7 +6,7 @@ const startDates = [
 const timer = (htmlEl, startTime) => {
    const intervalId = setInterval(() => {
         const timeNow = Date.now();
-        console.log('hello')
+        
         const distanceInMinutes = Math.floor((+new Date(startTime) - timeNow) / (60 * 1000));
         
         if (distanceInMinutes <= 10 && distanceInMinutes >= 1) {
