@@ -32,4 +32,4 @@ Hello JavaScript:
 	- na plakietce czas do rozpoczecia programu jest pokazywany z dokładnościa co do minuty
 	- jeżeli program juz się rozpoczął na plakietce pojawia się napis 'trwa'
 	- na plakiecte widnieje napis `Start za: x min`
-
+	- Pierwsze dwa elementy zawsze powinny odliczać od 2 minut, pozostałe od 5
