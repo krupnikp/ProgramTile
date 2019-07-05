@@ -38,6 +38,32 @@ body {
     border-radius: 5px 5px 0 0;
 }
 
+.col-header-timer {
+    position: absolute;
+    bottom: 10px;
+    border-radius: 3px;
+    background: rgb(44, 44, 64);
+    color: rgba(255,255,255, 0.5);
+    padding: 0 6px;
+    margin-left: 5px; 
+}
+
+.loader {
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    bottom: 0;
+    background: white;
+    opacity: 0.8;
+}
+.loader-bar {
+    position: absolute;
+    background: red;
+    display: inline-block;
+    height: 2px;
+    animation: progress 3s linear forwards;
+}
+
 .col-text-img{
     width: 40px;
     height: 40px;
@@ -51,10 +77,19 @@ body {
     color: white;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 5px;
-    line-height: 0.75;
+    line-height: 0.7;
 }
 
 .col-text-chanel, 
 .col-text-category {
-    color: rgba(255,255,255, 0.5);;
+    color: rgba(255,255,255, 0.5);
 }
+
+@keyframes progress {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
