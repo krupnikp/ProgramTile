@@ -1,22 +1,22 @@
-const startDate = +new Date('2019-07-04 16:25:30');
+const startDate = +new Date('2019-07-05 11:30:30');
+const startDate2 = +new Date('2019-07-04 18:55:30');
 
 
-const timer = (start) => {
-    const now = Date.now();
+const timer = (htmlEl, startTime) => {
+    const timeNow = Date.now();
 
-    const distance = Math.floor((startDate - now) / (60 * 1000));
+    const distanceInMinutes = Math.floor((startTime - timeNow) / (60 * 1000));
     
-    const minutes = distance % (1000 * 60);
-
-    if (distance <= 10 && distance >= 1) {
-        Array.from(document.getElementsByClassName("col-header-timer"), 
-        e => e.innerHTML = `Start za ${minutes} min`)
-    } else if (distance < 1) {
-        clearInterval(timer);
-        Array.from(document.getElementsByClassName("col-header-timer"),
-        e => e.innerHTML = "Trwa");
+    if (distanceInMinutes <= 10 && distanceInMinutes >= 1) {
+        htmlEl.innerHTML = `Start za ${distanceInMinutes} min`;
+    } else if (distanceInMinutes < 1) {
+        htmlEl.innerHTML = "Trwa";
     }
 };
 window.onload = timer
-setInterval(timer, 60000)
+setInterval(timer(startDate), 1000)
+// setInterval(timer(startDate2), 1000)
+
+document.getElementsByClassName("col-header-timer")[0]
+document.getElementsByClassName("col-header-timer")[0]
 
