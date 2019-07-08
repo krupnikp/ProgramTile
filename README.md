@@ -34,7 +34,7 @@ Hello JavaScript:
 	- na plakiecte widnieje napis `Start za: x min`
 	- Pierwsze dwa elementy zawsze powinny odliczać od 2 minut, pozostałe od 5
 
-## Część 3
+## Część 4
 
 JavaScript everywhere:
  
