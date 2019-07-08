@@ -1,12 +1,17 @@
 const startDates = [
-    '2019-07-05 15:21:30',
-    '2019-07-05 15:30:30'
+    Date.now() + (3000*60),
+    Date.now() + (3000*60),
+    Date.now() + (6000*60),
+    Date.now() + (6000*60),
 ]
+
+
+
 
 const timer = (htmlEl, startTime) => {
    const intervalId = setInterval(() => {
         const timeNow = Date.now();
-        
+
         const distanceInMinutes = Math.floor((+new Date(startTime) - timeNow) / (60 * 1000));
         
         if (distanceInMinutes <= 10 && distanceInMinutes >= 1) {
