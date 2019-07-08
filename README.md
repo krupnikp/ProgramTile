@@ -40,12 +40,12 @@ JavaScript everywhere:
  
     
     zaimplementować progress bar, tak aby odzwierciedlał prawdziwy progress, czyli:
-    w momencie gdy jeszcze program nie trwa albo się skończył progress bar ma nie być wyświetlany
-    w momencie gdy program trwa - wyświetlamy
+    - progress bar ma nie być wyświetlany, gdy program nie trwa
+    - w momencie gdy program trwa - wyświetlamy
     progress bar powinien odzwierciedlać aktualny progress programu 
         (czyli jeśli program trwa 1h, to jak już jest 30 minut to progress jest w połowie)
         
     najlepiej, aby wszystkie programy zamienić na obiekt (np. { title: '', startTime: '2018-06-06 12:30', endTime: startTime: '2018-06-06 13:30', //itd... })
     CZYLI:
-        wyrenderuj HTML, na podstawie listy obiektów
+        !!! wyrenderuj HTML, na podstawie listy obiektów !!!!
     
