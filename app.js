@@ -1,3 +1,5 @@
+
+
 const MINUTE = 60 * 1000;
 
 const chanelList = [{
@@ -5,7 +7,7 @@ const chanelList = [{
     category: 'Serial dokumentalny',
     imgURL: 'https://via.placeholder.com/250x150',
     startTime: Date.now() - (11*MINUTE),
-    endTime: Date.now() + (3*MINUTE),
+    endTime: Date.now() + (1*MINUTE),
 },
 {
     title: 'Mega schronisko w Dubaju',
@@ -31,18 +33,21 @@ const chanelList = [{
 ]
 
 
-const programTimer = (htmlEl, startTime) => {
-   const intervalId = setInterval(() => {
+const programTimer = (htmlEl, startTime, endTime) => {
+
+    const intervalId = setInterval(() => {
         const timeNow = Date.now();
 
         const distanceInMinutes = Math.floor((+new Date(startTime) - timeNow) / (MINUTE));
         
+        console.log(endTime - timeNow)
         if (distanceInMinutes <= 10 && distanceInMinutes >= 1) {
             htmlEl.innerHTML = `Start za ${distanceInMinutes} min`;
         } else if (distanceInMinutes < 1) {
-            htmlEl.innerHTML = "Trwa";
-            clearInterval(intervalId)
-
+            htmlEl.innerHTML = 'Trwa';
+        } else if (endTime < timeNow) {
+            htmlEl.innerHTML = 'Koniec';
+            clearInterval(intervalId)   
         }
     }, 1000)
 };
@@ -51,8 +56,8 @@ const programTimer = (htmlEl, startTime) => {
 const progresBar = (htmlEl, startTime, endTime) => {
     const totalTime = endTime - startTime;
     const pastTime = +new Date() - startTime;
-    const pastPercent = pastTime / totalTime * 100
-    // console.log (pastTime, totalTime, pastPercent)
+    const pastPercent = Math.floor(pastTime / totalTime * 100)
+    console.log (pastTime, totalTime, pastPercent)
     let width = 1;
     let animationTime = setInterval(frame, 1000)
     htmlEl.style.width = pastPercent + '%'; 
@@ -68,23 +73,13 @@ const progresBar = (htmlEl, startTime, endTime) => {
                 htmlEl.style.width = 0; 
                 return
             }
-            const pastPercent = pastTime / totalTime * 100
-            width = pastPercent;
-            htmlEl.style.width = pastPercent + '%';
         }
     } 
 }
 
 
-function chanelRender(chanelList){ 
+function chanelRender(chanelList, dateConverter){ 
 
-    function convertDate(timeInMs) {
-        const hour = new Date(timeInMs).getHours();
-        const minutes = new Date(timeInMs).getMinutes();
-
-        return  `${hour}:${(minutes < 10) ? `0${minutes}` : minutes }`
-    }
-    
     let chanel = '';
     for(i=0; i < chanelList.length; i++){
         chanel +=  `
@@ -97,22 +92,22 @@ function chanelRender(chanelList){
         <div class="col-text">
             <img class="col-text-img" src='${chanelList[i].imgURL}'>  
             <div>
-                <h4 class='col-text-title'>${chanelList[i].title}</h4>
-                <p class='col-text-chanel'>National geographic HD 
-                    <span class="col-chanel-time">${convertDate(chanelList[i].startTime)} - ${convertDate(chanelList[i].endTime)} </span> 
+                <h4 class="col-text-title">${chanelList[i].title}</h4>
+                <p class="col-text-chanel">National geographic HD 
+                    <span class="col-chanel-time">${dateConverter(chanelList[i].startTime)} - ${dateConverter(chanelList[i].endTime)} </span> 
                 </p>
-                <p class='col-text-category'>${chanelList[i].category}</p>
+                <p class="col-text-category">${chanelList[i].category}</p>
             </div>
         </div>      
         </div>`;
     }
-    return chanel
+    return chanel;
 }
 
-document.querySelector('.col-list').innerHTML = chanelRender(chanelList);
+document.querySelector('.col-list').innerHTML = chanelRender(chanelList, dateConverter);
 
-[...document.getElementsByClassName("col-header-timer")].forEach((el, index) => {
-    programTimer(el, chanelList[index].startTime);
+[...document.getElementsByClassName('col-header-timer')].forEach((el, index) => {
+    programTimer(el, chanelList[index].startTime, chanelList[index].endTime);
 });
 
 [...document.getElementsByClassName('loader-bar')].forEach((el, index) =>{
