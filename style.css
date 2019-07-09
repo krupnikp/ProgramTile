@@ -61,8 +61,9 @@ body {
     background: red;
     display: inline-block;
     height: 2px;
-    animation: progress 3s linear forwards;
+    width: 1%;
 }
+
 
 .col-text-img{
     width: 40px;
@@ -84,12 +85,3 @@ body {
 .col-text-category {
     color: rgba(255,255,255, 0.5);
 }
-
-@keyframes progress {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
-  }
