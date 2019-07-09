@@ -82,8 +82,6 @@ function chanelRender(chanelList){
         const hour = new Date(timeInMs).getHours();
         const minutes = new Date(timeInMs).getMinutes();
 
-        if (minutes)//s?t:f
-
         return  `${hour}:${(minutes < 10) ? `0${minutes}` : minutes }`
     }
     
