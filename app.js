@@ -4,7 +4,7 @@ const chanelList = [{
     title: 'Megalotnisko w Dubaju',
     category: 'Serial dokumentalny',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: Date.now() - (1*MINUTE),
+    startTime: Date.now() - (11*MINUTE),
     endTime: Date.now() + (3*MINUTE),
 },
 {
@@ -18,14 +18,14 @@ const chanelList = [{
     title: 'Megalotnisko w Dubaju',
     category: 'Serial dokumentalny',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: Date.now() + (1*MINUTE),
-    endTime: Date.now() + (5*MINUTE),
+    startTime: Date.now() + (5*MINUTE),
+    endTime: Date.now() + (15*MINUTE),
 },
 {
     title: 'Mega schronisko w Dubaju',
     category: 'Sport',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: Date.now() - (1*MINUTE),
+    startTime: Date.now() - (20*MINUTE),
     endTime: Date.now() + (61*MINUTE),
 }
 ]
@@ -84,7 +84,7 @@ function chanelRender(chanelList){
 
         if (minutes)//s?t:f
 
-        return  `${hour}:${(minutes) ?}`
+        return  `${hour}:${(minutes < 10) ? `0${minutes}` : minutes }`
     }
     
     let chanel = '';
@@ -101,7 +101,7 @@ function chanelRender(chanelList){
             <div>
                 <h4 class='col-text-title'>${chanelList[i].title}</h4>
                 <p class='col-text-chanel'>National geographic HD 
-                    <span class="col-chanel-time">${convertDate(chanelList[i].startTime)}: - ${convertDate(chanelList[i].endTime)} </span> 
+                    <span class="col-chanel-time">${convertDate(chanelList[i].startTime)} - ${convertDate(chanelList[i].endTime)} </span> 
                 </p>
                 <p class='col-text-category'>${chanelList[i].category}</p>
             </div>
