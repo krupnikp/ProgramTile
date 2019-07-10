@@ -1,52 +1,52 @@
 const MINUTE = 60 * 1000;
-const TIMENOW = Date.now();
+const TIME_NOW = Date.now();
 
 const channelsList = [{
     title: 'Megalotnisko w Dubaju',
     category: 'Serial dokumentalny',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: TIMENOW + (12*MINUTE),
-    endTime: TIMENOW + (2*MINUTE),
+    startTime: TIME_NOW + (11*MINUTE),
+    endTime: TIME_NOW + (20*MINUTE),
 },
 {
     title: 'Mega schronisko w Dubaju',
     category: 'Sport',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: TIMENOW + (2*MINUTE),
-    endTime: TIMENOW + (30*MINUTE),
+    startTime: TIME_NOW + (2*MINUTE),
+    endTime: TIME_NOW + (30*MINUTE),
 },
 {
     title: 'Megalotnisko w Dubaju',
     category: 'Serial dokumentalny',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: TIMENOW - (5*MINUTE),
-    endTime: TIMENOW + (15*MINUTE),
+    startTime: TIME_NOW - (5*MINUTE),
+    endTime: TIME_NOW + (15*MINUTE),
 },
 {
     title: 'Mega schronisko w Dubaju',
     category: 'Sport',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: TIMENOW - (20*MINUTE),
-    endTime: TIMENOW + (61*MINUTE),
+    startTime: TIME_NOW - (20*MINUTE),
+    endTime: TIME_NOW + (61*MINUTE),
 }];
 
 
 const programTimer = (htmlEl, startTime, endTime) => {
-    let timeNow = Date.now();
-    let distanceInMinutes = Math.floor((+new Date(startTime) - timeNow) / (MINUTE));
 
-    setTimeout(test, distanceInMinutes);
+    const timeToStart = startTime - Date.now() - 10*MINUTE;
+    // console.log(startTime, +new Date(startTime), timeToStart)
+    setTimeout(renderTimer, timeToStart);
 
-    function test() {
+    function renderTimer() {
         const intervalId = setInterval(() => {
-            timeNow = Date.now();
-            distanceInMinutes = Math.floor((+new Date(startTime) - timeNow) / (MINUTE));
+            const timeNow = Date.now();
+            const distanceInMinutes = Math.ceil((startTime - timeNow) / MINUTE);
             // console.log(endTime - timeNow)
-            if (distanceInMinutes <= 10 && distanceInMinutes >= 1) {
+            if (distanceInMinutes >= 1) {
                 htmlEl.innerHTML = `Start za ${distanceInMinutes} min`;
-            } else if (distanceInMinutes < 1 && endTime >= timeNow) {
+            } else if (endTime >= timeNow) {
                 htmlEl.innerHTML = 'Trwa';
-            } else if (endTime < timeNow) {
+            } else {
                 htmlEl.innerHTML = '';
                 clearInterval(intervalId);  
             }
@@ -98,7 +98,7 @@ function chanelRender(channelsList, dateConverter){
     return channels;
 };
 
-document.querySelector('.col-list').innerHTML = chanelRender(channelsList, dateConverter);
+document.querySelector('.col-list').innerHTML = chanelRender(channelsList, aaaaaaa);
 
 [...document.getElementsByClassName('col-header-timer')].forEach((el, index) => {
     programTimer(el, channelsList[index].startTime, channelsList[index].endTime);
