@@ -98,7 +98,7 @@ function chanelRender(channelsList, dateConverter){
     return channels;
 };
 
-document.querySelector('.col-list').innerHTML = chanelRender(channelsList, aaaaaaa);
+document.querySelector('.col-list').innerHTML = chanelRender(channelsList, dateConverter);
 
 [...document.getElementsByClassName('col-header-timer')].forEach((el, index) => {
     programTimer(el, channelsList[index].startTime, channelsList[index].endTime);
