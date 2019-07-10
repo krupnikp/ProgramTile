@@ -5,14 +5,14 @@ const channelsList = [{
     title: 'Megalotnisko w Dubaju',
     category: 'Serial dokumentalny',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: TIME_NOW + (11*MINUTE),
-    endTime: TIME_NOW + (20*MINUTE),
+    startTime: TIME_NOW - (11*MINUTE),
+    endTime: TIME_NOW + (1*MINUTE),
 },
 {
     title: 'Mega schronisko w Dubaju',
     category: 'Sport',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: TIME_NOW + (2*MINUTE),
+    startTime: TIME_NOW + (11*MINUTE),
     endTime: TIME_NOW + (30*MINUTE),
 },
 {
@@ -55,20 +55,26 @@ const programTimer = (htmlEl, startTime, endTime) => {
 };
 
 const progressBar = (htmlEl, startTime, endTime) => {
+    
+    const timeStart = startTime - Date.now();
+    setTimeout(renderBar, timeStart)
 
-    const intervalId = setInterval(() => {
+    function renderBar() {
+        const intervalId = setInterval(() => {
    
-        const totalTime = endTime - startTime;
-        const pastTime = +new Date() - startTime;
-        const pastPercent = Math.floor(pastTime / totalTime * 100);
-        // console.log (pastTime, totalTime, pastPercent)
-        
-        if (pastPercent > 100) {
-            clearInterval(intervalId);
-        } else {
-            htmlEl.style.width = pastPercent + '%';
-        }
-    }, 1000)
+            const totalTime = endTime - startTime;
+            const pastTime = +new Date() - startTime;
+            const pastPercent = Math.floor(pastTime / totalTime * 100);
+            // console.log (pastTime, totalTime, pastPercent)
+            
+            if (pastPercent > 100) {
+                clearInterval(intervalId);
+                htmlEl.parentElement.style.opacity = 0;
+            } else {
+                htmlEl.style.width = pastPercent + '%';
+            }
+        }, 1000)
+    }
 };
 
 
