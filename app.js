@@ -1,67 +1,76 @@
 const MINUTE = 60 * 1000;
+const TIMENOW = Date.now();
 
 const channelsList = [{
     title: 'Megalotnisko w Dubaju',
     category: 'Serial dokumentalny',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: Date.now() - (11*MINUTE),
-    endTime: Date.now() + (1*MINUTE),
+    startTime: TIMENOW + (12*MINUTE),
+    endTime: TIMENOW + (2*MINUTE),
 },
 {
     title: 'Mega schronisko w Dubaju',
     category: 'Sport',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: Date.now() + (2*MINUTE),
-    endTime: Date.now() + (30*MINUTE),
+    startTime: TIMENOW + (2*MINUTE),
+    endTime: TIMENOW + (30*MINUTE),
 },
 {
     title: 'Megalotnisko w Dubaju',
     category: 'Serial dokumentalny',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: Date.now() + (5*MINUTE),
-    endTime: Date.now() + (15*MINUTE),
+    startTime: TIMENOW - (5*MINUTE),
+    endTime: TIMENOW + (15*MINUTE),
 },
 {
     title: 'Mega schronisko w Dubaju',
     category: 'Sport',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: Date.now() - (20*MINUTE),
-    endTime: Date.now() + (61*MINUTE),
-}
-]
+    startTime: TIMENOW - (20*MINUTE),
+    endTime: TIMENOW + (61*MINUTE),
+}];
 
 
 const programTimer = (htmlEl, startTime, endTime) => {
+    let timeNow = Date.now();
+    let distanceInMinutes = Math.floor((+new Date(startTime) - timeNow) / (MINUTE));
+
+    setTimeout(test, distanceInMinutes);
+
+    function test() {
+        const intervalId = setInterval(() => {
+            timeNow = Date.now();
+            distanceInMinutes = Math.floor((+new Date(startTime) - timeNow) / (MINUTE));
+            
+            console.log(endTime - timeNow)
+            if (distanceInMinutes <= 10 && distanceInMinutes >= 1) {
+                htmlEl.innerHTML = `Start za ${distanceInMinutes} min`;
+            } else if (distanceInMinutes < 1 && endTime >= timeNow) {
+                htmlEl.innerHTML = 'Trwa';
+            } else if (endTime < timeNow) {
+                htmlEl.innerHTML = '';
+                clearInterval(intervalId);  
+            }
+        }, 1000)      
+    }  
+};
+
+const progressBar = (htmlEl, startTime, endTime) => {
 
     const intervalId = setInterval(() => {
-        const timeNow = Date.now();
-        const distanceInMinutes = Math.floor((+new Date(startTime) - timeNow) / (MINUTE));
+   
+        const totalTime = endTime - startTime;
+        const pastTime = +new Date() - startTime;
+        const pastPercent = Math.floor(pastTime / totalTime * 100);
+        // console.log (pastTime, totalTime, pastPercent)
         
-        // console.log(endTime - timeNow)
-        if (distanceInMinutes <= 10 && distanceInMinutes >= 1) {
-            htmlEl.innerHTML = `Start za ${distanceInMinutes} min`;
-        } else if (distanceInMinutes < 1) {
-            htmlEl.innerHTML = 'Trwa';
-        } else if (endTime < timeNow) {
-            htmlEl.innerHTML = 'Koniec';
-            clearInterval(intervalId)   
+        if (pastPercent > 100) {
+            clearInterval(intervalId);
+        } else {
+            htmlEl.style.width = pastPercent + '%';
         }
     }, 1000)
 };
-
-const progresBar = (htmlEl, startTime, endTime) => {
-   
-    const totalTime = endTime - startTime;
-    const pastTime = +new Date() - startTime;
-    const pastPercent = Math.floor(pastTime / totalTime * 100)
-    console.log (pastTime, totalTime, pastPercent)
-   
-    if (pastPercent >= 100) {
-        clearInterval(progresBar)
-    } else {
-        htmlEl.style.width = pastPercent + '%';
-    }
-}
 
 
 function chanelRender(channelsList, dateConverter){ 
@@ -88,7 +97,7 @@ function chanelRender(channelsList, dateConverter){
         </div>`;
     }
     return channels;
-}
+};
 
 document.querySelector('.col-list').innerHTML = chanelRender(channelsList, dateConverter);
 
@@ -96,6 +105,6 @@ document.querySelector('.col-list').innerHTML = chanelRender(channelsList, dateC
     programTimer(el, channelsList[index].startTime, channelsList[index].endTime);
 });
 
-[...document.getElementsByClassName('loader-bar')].forEach((el, index) =>{
-    setInterval(progresBar, 1000, el, channelsList[index].startTime, channelsList[index].endTime)
+[...document.getElementsByClassName('loader-bar')].forEach((el, index) => {
+    progressBar(el, channelsList[index].startTime, channelsList[index].endTime);
 });
