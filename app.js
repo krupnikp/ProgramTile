@@ -41,8 +41,7 @@ const programTimer = (htmlEl, startTime, endTime) => {
         const intervalId = setInterval(() => {
             timeNow = Date.now();
             distanceInMinutes = Math.floor((+new Date(startTime) - timeNow) / (MINUTE));
-            
-            console.log(endTime - timeNow)
+            // console.log(endTime - timeNow)
             if (distanceInMinutes <= 10 && distanceInMinutes >= 1) {
                 htmlEl.innerHTML = `Start za ${distanceInMinutes} min`;
             } else if (distanceInMinutes < 1 && endTime >= timeNow) {
