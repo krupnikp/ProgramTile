@@ -1,8 +1,6 @@
-
-
 const MINUTE = 60 * 1000;
 
-const chanelList = [{
+const channelsList = [{
     title: 'Megalotnisko w Dubaju',
     category: 'Serial dokumentalny',
     imgURL: 'https://via.placeholder.com/250x150',
@@ -37,10 +35,9 @@ const programTimer = (htmlEl, startTime, endTime) => {
 
     const intervalId = setInterval(() => {
         const timeNow = Date.now();
-
         const distanceInMinutes = Math.floor((+new Date(startTime) - timeNow) / (MINUTE));
         
-        console.log(endTime - timeNow)
+        // console.log(endTime - timeNow)
         if (distanceInMinutes <= 10 && distanceInMinutes >= 1) {
             htmlEl.innerHTML = `Start za ${distanceInMinutes} min`;
         } else if (distanceInMinutes < 1) {
@@ -52,37 +49,26 @@ const programTimer = (htmlEl, startTime, endTime) => {
     }, 1000)
 };
 
-
 const progresBar = (htmlEl, startTime, endTime) => {
+   
     const totalTime = endTime - startTime;
     const pastTime = +new Date() - startTime;
     const pastPercent = Math.floor(pastTime / totalTime * 100)
     console.log (pastTime, totalTime, pastPercent)
-    let width = 1;
-    let animationTime = setInterval(frame, 1000)
-    htmlEl.style.width = pastPercent + '%'; 
-    if(pastTime < 0) {
-        htmlEl.style.width = 0; 
+   
+    if (pastPercent >= 100) {
+        clearInterval(progresBar)
+    } else {
+        htmlEl.style.width = pastPercent + '%';
     }
-    function frame() {
-        if (width >= 100) {
-          clearInterval(animationTime);
-        } else {
-            const pastTime = +new Date() - startTime;
-            if(pastTime < 0) {
-                htmlEl.style.width = 0; 
-                return
-            }
-        }
-    } 
 }
 
 
-function chanelRender(chanelList, dateConverter){ 
+function chanelRender(channelsList, dateConverter){ 
 
-    let chanel = '';
-    for(i=0; i < chanelList.length; i++){
-        chanel +=  `
+    let channels = '';
+    for(let channel of channelsList){
+        channels +=  `
         <div class="col">
         <div class="col-header">
             <img class="col-header-img" src='https://via.placeholder.com/250x150'>
@@ -90,26 +76,26 @@ function chanelRender(chanelList, dateConverter){
             <div class="col-header-timer"></div>
         </div>
         <div class="col-text">
-            <img class="col-text-img" src='${chanelList[i].imgURL}'>  
+            <img class="col-text-img" src='${channel.imgURL}'>  
             <div>
-                <h4 class="col-text-title">${chanelList[i].title}</h4>
-                <p class="col-text-chanel">National geographic HD 
-                    <span class="col-chanel-time">${dateConverter(chanelList[i].startTime)} - ${dateConverter(chanelList[i].endTime)} </span> 
+                <h4 class="col-text-title">${channel.title}</h4>
+                <p class="col-text-channel">National geographic HD 
+                    <span class="col-channel-time">${dateConverter(channel.startTime)} - ${dateConverter(channel.endTime)} </span> 
                 </p>
-                <p class="col-text-category">${chanelList[i].category}</p>
+                <p class="col-text-category">${channel.category}</p>
             </div>
         </div>      
         </div>`;
     }
-    return chanel;
+    return channels;
 }
 
-document.querySelector('.col-list').innerHTML = chanelRender(chanelList, dateConverter);
+document.querySelector('.col-list').innerHTML = chanelRender(channelsList, dateConverter);
 
 [...document.getElementsByClassName('col-header-timer')].forEach((el, index) => {
-    programTimer(el, chanelList[index].startTime, chanelList[index].endTime);
+    programTimer(el, channelsList[index].startTime, channelsList[index].endTime);
 });
 
 [...document.getElementsByClassName('loader-bar')].forEach((el, index) =>{
-    progresBar(el, chanelList[index].startTime, chanelList[index].endTime)
+    setInterval(progresBar, 1000, el, channelsList[index].startTime, channelsList[index].endTime)
 });
