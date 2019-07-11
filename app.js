@@ -71,9 +71,14 @@ const progressBar = (htmlEl, startTime, endTime) => {
         
         if (pastPercent > 100) {
             clearInterval(intervalId);
-            htmlEl.parentElement.style.opacity = 0;
+            htmlEl.innerHTML = '';
         } else {
-            htmlEl.style.width = pastPercent + '%';
+            // htmlEl.style.width = pastPercent + '%';
+            htmlEl.innerHTML =
+            `<rect class="loader" width='100%' height='100%' fill='white' /> 
+            <rect class="loader-bar" width='${pastPercent + '%'}' height='100%' fill='red'>
+            
+            </rect>`;
         }
     }
 };
@@ -89,15 +94,7 @@ function chanelRender(channelsList, dateConverter){
             <img class="col-header-img" src='https://via.placeholder.com/250x150'>
             <div class="col-header-timer"></div>
             <svg class="loader" width='100%' height='2'>
-                <rect class="loader" width='100%' height='100%' fill='white' /> 
-                <rect class="loader-bar" width='100%' height='100%' fill='red'>
-                    <animate id="animation"
-                    attributeName='width'
-                    attributeType="XML"
-                    from="20" to="100%"
-                    begin="0s" dur="8s"
-                    fill="freeze" />
-                </rect>
+                
             </svg>
         </div>
         <div class="col-text">
@@ -121,6 +118,6 @@ document.querySelector('.col-list').innerHTML = chanelRender(channelsList, dateC
     programTimer(el, channelsList[index].startTime, channelsList[index].endTime);
 });
 
-[...document.getElementsByClassName('loader-bar')].forEach((el, index) => {
+[...document.getElementsByClassName('loader')].forEach((el, index) => {
     progressBar(el, channelsList[index].startTime, channelsList[index].endTime);
 });
