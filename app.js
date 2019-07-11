@@ -34,23 +34,23 @@ const channelsList = [{
 const programTimer = (htmlEl, startTime, endTime) => {
 
     const timeToStart = startTime - Date.now() - 10*MINUTE;
-    // console.log(startTime, +new Date(startTime), timeToStart)
-    setTimeout(renderTimer, timeToStart);
+    const intervalId = setInterval(renderTimer, 1000)  
+
+    renderTimer()
+    setTimeout(intervalId, timeToStart);
 
     function renderTimer() {
-        const intervalId = setInterval(() => {
-            const timeNow = Date.now();
-            const distanceInMinutes = Math.ceil((startTime - timeNow) / MINUTE);
-            // console.log(endTime - timeNow)
-            if (distanceInMinutes >= 1) {
-                htmlEl.innerHTML = `Start za ${distanceInMinutes} min`;
-            } else if (endTime >= timeNow) {
-                htmlEl.innerHTML = 'Trwa';
-            } else {
-                htmlEl.innerHTML = '';
-                clearInterval(intervalId);  
-            }
-        }, 1000)      
+        const timeNow = Date.now();
+        const distanceInMinutes = Math.ceil((startTime - timeNow) / MINUTE);
+        // console.log(endTime - timeNow)
+        if (distanceInMinutes >= 1) {
+            htmlEl.innerHTML = `Start za ${distanceInMinutes} min`;
+        } else if (endTime >= timeNow) {
+            htmlEl.innerHTML = 'Trwa';
+        } else {
+            htmlEl.innerHTML = '';
+            clearInterval(intervalId);  
+        }    
     }  
 };
 
@@ -84,13 +84,20 @@ function chanelRender(channelsList, dateConverter){
     let channels = '';
     for(let channel of channelsList){
         channels +=  `
-        <div class="col">
+        <div class="col"> 
         <div class="col-header">
             <img class="col-header-img" src='https://via.placeholder.com/250x150'>
             <div class="col-header-timer"></div>
             <svg class="loader" width='100%' height='2'>
                 <rect class="loader" width='100%' height='100%' fill='white' /> 
-                <rect class="loader-bar" id="bar-animation" fill='red'/>
+                <rect class="loader-bar" width='100%' height='100%' fill='red'>
+                    <animate id="animation"
+                    attributeName='width'
+                    attributeType="XML"
+                    from="20" to="100%"
+                    begin="0s" dur="8s"
+                    fill="freeze" />
+                </rect>
             </svg>
         </div>
         <div class="col-text">
@@ -102,7 +109,7 @@ function chanelRender(channelsList, dateConverter){
                 </p>
                 <p class="col-text-category">${channel.category}</p>
             </div>
-        </div>      
+        </div>   
         </div>`;
     }
     return channels;
