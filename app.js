@@ -12,8 +12,8 @@ const channelsList = [{
     title: 'Mega schronisko w Dubaju',
     category: 'Sport',
     imgURL: 'https://via.placeholder.com/250x150',
-    startTime: TIME_NOW + (11*MINUTE),
-    endTime: TIME_NOW + (30*MINUTE),
+    startTime: TIME_NOW + (1*MINUTE),
+    endTime: TIME_NOW + (2*MINUTE),
 },
 {
     title: 'Megalotnisko w Dubaju',
@@ -57,23 +57,24 @@ const programTimer = (htmlEl, startTime, endTime) => {
 const progressBar = (htmlEl, startTime, endTime) => {
     
     const timeStart = startTime - Date.now();
-    setTimeout(renderBar, timeStart)
+    const onePercenteTime = (endTime - startTime) / 100;
+    const intervalId = setInterval(renderBar, onePercenteTime);
+
+    renderBar();
+    setTimeout(intervalId, timeStart);
 
     function renderBar() {
-        const intervalId = setInterval(() => {
-   
-            const totalTime = endTime - startTime;
-            const pastTime = +new Date() - startTime;
-            const pastPercent = Math.floor(pastTime / totalTime * 100);
-            // console.log (pastTime, totalTime, pastPercent)
-            
-            if (pastPercent > 100) {
-                clearInterval(intervalId);
-                htmlEl.parentElement.style.opacity = 0;
-            } else {
-                htmlEl.style.width = pastPercent + '%';
-            }
-        }, 1000)
+        const totalTime = endTime - startTime;
+        const pastTime = +new Date() - startTime;
+        const pastPercent = Math.floor(pastTime / totalTime * 100);
+        // console.log (pastTime, totalTime, pastPercent)
+        
+        if (pastPercent > 100) {
+            clearInterval(intervalId);
+            htmlEl.parentElement.style.opacity = 0;
+        } else {
+            htmlEl.style.width = pastPercent + '%';
+        }
     }
 };
 
@@ -86,8 +87,11 @@ function chanelRender(channelsList, dateConverter){
         <div class="col">
         <div class="col-header">
             <img class="col-header-img" src='https://via.placeholder.com/250x150'>
-            <div class="loader"><span class="loader-bar"></span></div>
             <div class="col-header-timer"></div>
+            <svg class="loader" width='100%' height='2'>
+                <rect class="loader" width='100%' height='100%' fill='white' /> 
+                <rect class="loader-bar" id="bar-animation" fill='red'/>
+            </svg>
         </div>
         <div class="col-text">
             <img class="col-text-img" src='${channel.imgURL}'>  
