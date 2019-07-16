@@ -15,13 +15,20 @@ body {
     margin: 40px;
     list-style-type: none;
 }
-
+ .col * {pointer-events: none;}
 .over{
     background:silver;
     width: 246px;
     height: 211px;
     border: 2px dashed #000;
-    margin-top: 20px
+    margin-top: 20px;
+    overflow: hidden;
+    animation: slide ease 0.5s forwards;
+    opacity: 0.2;
+}
+@keyframes slide {
+    from {height: 0;}
+    to {height: 211px;}
 }
 
 .col-header {
@@ -92,8 +99,4 @@ body {
     background: red;
 }
 
-/* .over {
-    background: black;
-    width: 200px;
-    height: 100px;
-} */
+

@@ -110,7 +110,7 @@ function channelRender(channelsList, dateConverter){
                 <p class="col-text-category">${channel.category}</p>
             </div>
         </div>
-        <div class="over" style='display: none' />   
+        <div style='display: none;' />   
         </li>`;
     }
     return channels;
