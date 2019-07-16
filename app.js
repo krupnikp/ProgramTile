@@ -7,6 +7,7 @@ const channelsList = [{
     imgURL: 'https://via.placeholder.com/250x150',
     startTime: TIME_NOW - (11*MINUTE),
     endTime: TIME_NOW + (1*MINUTE),
+    id: 1,
 },
 {
     title: 'Mega schronisko w Dubaju',
@@ -14,6 +15,7 @@ const channelsList = [{
     imgURL: 'https://via.placeholder.com/250x150',
     startTime: TIME_NOW + (1*MINUTE),
     endTime: TIME_NOW + (2*MINUTE),
+    id: 2,
 },
 {
     title: 'Megalotnisko w Dubaju',
@@ -21,6 +23,7 @@ const channelsList = [{
     imgURL: 'https://via.placeholder.com/250x150',
     startTime: TIME_NOW - (5*MINUTE),
     endTime: TIME_NOW + (15*MINUTE),
+    id: 3,
 },
 {
     title: 'Mega schronisko w Dubaju',
@@ -28,6 +31,7 @@ const channelsList = [{
     imgURL: 'https://via.placeholder.com/250x150',
     startTime: TIME_NOW - (20*MINUTE),
     endTime: TIME_NOW + (61*MINUTE),
+    id: 4,
 }];
 
 
@@ -72,24 +76,23 @@ const progressBar = (htmlEl, startTime, endTime) => {
         if (pastPercent > 100) {
             clearInterval(intervalId);
             htmlEl.innerHTML = '';
-        } else {
+        } else if (pastPercent >= 0){
             // htmlEl.style.width = pastPercent + '%';
             htmlEl.innerHTML =
             `<rect class="loader" width='100%' height='100%' fill='white' /> 
             <rect class="loader-bar" width='${pastPercent + '%'}' height='100%' fill='red'>
-            
             </rect>`;
         }
     }
 };
 
 
-function chanelRender(channelsList, dateConverter){ 
+function channelRender(channelsList, dateConverter){ 
 
     let channels = '';
     for(let channel of channelsList){
         channels +=  `
-        <div class="col"> 
+        <li class="col" draggable='true' id='${channel.id}'> 
         <div class="col-header">
             <img class="col-header-img" src='https://via.placeholder.com/250x150'>
             <div class="col-header-timer"></div>
@@ -107,12 +110,12 @@ function chanelRender(channelsList, dateConverter){
                 <p class="col-text-category">${channel.category}</p>
             </div>
         </div>   
-        </div>`;
+        </li>`;
     }
     return channels;
 };
 
-document.querySelector('.col-list').innerHTML = chanelRender(channelsList, dateConverter);
+document.querySelector('.col-list').innerHTML = channelRender(channelsList, dateConverter);
 
 [...document.getElementsByClassName('col-header-timer')].forEach((el, index) => {
     programTimer(el, channelsList[index].startTime, channelsList[index].endTime);
@@ -120,4 +123,8 @@ document.querySelector('.col-list').innerHTML = chanelRender(channelsList, dateC
 
 [...document.getElementsByClassName('loader')].forEach((el, index) => {
     progressBar(el, channelsList[index].startTime, channelsList[index].endTime);
+});
+
+[...document.getElementsByClassName('col')].forEach((el) => { /// or get element by tag name
+    dnd(el)
 });
