@@ -12,14 +12,21 @@ body {
 
 .col {
     width: 250px;
-    background: rgb(44, 44, 64);
     margin: 40px;
     list-style-type: none;
 }
 
+.over{
+    background:silver;
+    width: 246px;
+    height: 211px;
+    border: 2px dashed #000;
+    margin-top: 20px
+}
+
 .col-header {
+    background: rgb(44, 44, 64);
     height: 150px;
-    margin-bottom: 10px;
     position: relative;
 }
 
@@ -62,6 +69,8 @@ body {
     height: 40px;
 }
 .col-text {
+    padding-top: 10px; 
+    background: rgb(44, 44, 64);
     display: flex;
     justify-content: space-between;
 }
@@ -83,6 +92,8 @@ body {
     background: red;
 }
 
-.over {
+/* .over {
     background: black;
-}
+    width: 200px;
+    height: 100px;
+} */
