@@ -15,7 +15,9 @@ body {
     margin: 40px;
     list-style-type: none;
 }
- .col * {pointer-events: none;}
+
+.col * {pointer-events: none;}
+
 .over{
     background:silver;
     width: 246px;
@@ -92,11 +94,6 @@ body {
 .col-text-channel, 
 .col-text-category {
     color: rgba(255,255,255, 0.5);
-}
-
-.drag-animation {
-    opacity: 0.5;
-    background: red;
 }
 
 

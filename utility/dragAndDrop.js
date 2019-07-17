@@ -2,7 +2,7 @@ let draggableElement = null;
 let catchedTargetLi = null;
 
 function handleDragStart(event) {
-    
+
     draggableElement = event.target;  // or ... = this
     this.style.opacity = '0.3'; 
 }
@@ -11,12 +11,11 @@ function handleDragOver(event) {
     event.preventDefault();
     catchedTargetLi = event.target.closest('li');
 
-    if (draggableElement !== catchedTargetLi) {
+    if (draggableElement !== catchedTargetLi && draggableElement.previousElementSibling !== catchedTargetLi ) {
         catchedTargetLi.lastChild.style.display = 'block';
         catchedTargetLi.lastChild.classList.add('over') // animation run
     }
 }
-
 
 function handleDragLeave(event) {
     catchedTargetLi = event.target.closest('li');
