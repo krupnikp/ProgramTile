@@ -4,7 +4,7 @@ const TIME_NOW = Date.now();
 const channelsList = [{
     title: 'Megalotnisko w Dubaju',
     category: 'Serial dokumentalny',
-    imgURL: 'https://via.placeholder.com/250x150',
+    imgURL: 'http://lorempixel.com/250/150/abstract/1',
     startTime: TIME_NOW - (11*MINUTE),
     endTime: TIME_NOW + (1*MINUTE),
     id: 1,
@@ -12,7 +12,7 @@ const channelsList = [{
 {
     title: 'Mega schronisko w Dubaju',
     category: 'Sport',
-    imgURL: 'https://via.placeholder.com/250x150',
+    imgURL: 'http://lorempixel.com/250/150/abstract/2',
     startTime: TIME_NOW + (1*MINUTE),
     endTime: TIME_NOW + (2*MINUTE),
     id: 2,
@@ -20,7 +20,7 @@ const channelsList = [{
 {
     title: 'Megalotnisko w Dubaju',
     category: 'Serial dokumentalny',
-    imgURL: 'https://via.placeholder.com/250x150',
+    imgURL: 'http://lorempixel.com/250/150/abstract/3',
     startTime: TIME_NOW - (5*MINUTE),
     endTime: TIME_NOW + (15*MINUTE),
     id: 3,
@@ -28,7 +28,7 @@ const channelsList = [{
 {
     title: 'Mega schronisko w Dubaju',
     category: 'Sport',
-    imgURL: 'https://via.placeholder.com/250x150',
+    imgURL: 'http://lorempixel.com/250/150/abstract/4',
     startTime: TIME_NOW - (20*MINUTE),
     endTime: TIME_NOW + (61*MINUTE),
     id: 4,
@@ -93,8 +93,9 @@ function channelRender(channelsList, dateConverter){
     for(let channel of channelsList){
         channels +=  `
         <li class="col" draggable='true' id='${channel.id}'> 
+        <div class="over-top" style='display: none;'></div>
         <div class="col-header">
-            <img class="col-header-img" src='https://via.placeholder.com/250x150'>
+            <img class="col-header-img" src='${channel.imgURL}'>
             <div class="col-header-timer"></div>
             <svg class="loader" width='100%' height='2'>
                 
@@ -110,7 +111,7 @@ function channelRender(channelsList, dateConverter){
                 <p class="col-text-category">${channel.category}</p>
             </div>
         </div>
-        <div style='display: none;' />   
+        <div class="over-bottom"></div>   
         </li>`;
     }
     return channels;

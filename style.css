@@ -16,22 +16,36 @@ body {
     list-style-type: none;
 }
 
-.col * {pointer-events: none;}
-
-.over{
+.over-top {
+    display: none;
     background:silver;
     width: 246px;
-    height: 211px;
+    height: 111px;
+    border: 2px dashed #000;
+    margin-bottom: 20px;
+    overflow: hidden;
+    animation: slide ease-out 0.5s forwards;
+    opacity: 0.2;
+}
+
+.over-bottom {
+    display: none;
+    background:silver;
+    width: 246px;
+    height: 111px;
     border: 2px dashed #000;
     margin-top: 20px;
     overflow: hidden;
-    animation: slide ease 0.5s forwards;
+    animation: slide ease-out 0.5s forwards;
     opacity: 0.2;
 }
 @keyframes slide {
     from {height: 0;}
-    to {height: 211px;}
+    to {height: 111px;}
 }
+
+/* li * {pointer-events: none;} */
+
 
 .col-header {
     background: rgb(44, 44, 64);
