@@ -21,6 +21,7 @@ body {
     background: rgb(44, 44, 64);
     height: 150px;
     position: relative;
+    pointer-events: none;
 }
 
 .col-header::before {
@@ -32,6 +33,7 @@ body {
     right: 0;
     border-radius: 5px 5px 0 0;
     background: linear-gradient(to bottom, rgba(44,44,64,0), rgba(44,44,64,0.8));
+    /* pointer-events: none; */
 }
 .col-header-img {
     height: 100%;
@@ -83,35 +85,46 @@ body {
 
 
 .over-top {
-    display: none;
     background:silver;
-    width: 246px;
-    height: 111px;
-    border: 2px dashed #000;
+    width: 100%;
+    height: 0;
+    /* border: 2px dashed #000; */
     /* margin-bottom: 20px; */
-    overflow: hidden;
-    animation: slide ease-out 0.5s forwards;
-    opacity: 0.2;
+    /* overflow: hidden; */
+    /* animation: slide ease-out 0.5s forwards; */
+    /* opacity: 0.2; */
+}
+
+.over-top-target {
+    position: absolute;
+    top:0;
+    right: 0px;
+    width: 100%;
+    height: 100px;
+    background: blue;
+    opacity: 0.4;
+    z-index: 1;
 }
 
 .over-bottom {
     background:silver;
     width: 100%;
     height: 0;
-    border: 2px dashed #000;
+    /* border: 2px dashed #000; */
     /* margin-top: 20px; */
     /* overflow: hidden; */
     /* animation: slide ease-out 0.5s forwards; */
+    /* opacity: 0.2; */
 }
 
 .over-bottom-target {
     position: absolute;
-    top:105px;
+    bottom:0;
     right: 0px;
     width: 100%;
-    height: 105px;
+    height: 100px;
     background: red;
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
 
@@ -119,5 +132,3 @@ body {
     from {height: 0;}
     to {height: 111px;}
 }
-
-.over

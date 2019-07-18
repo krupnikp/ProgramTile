@@ -93,7 +93,7 @@ function channelRender(channelsList, dateConverter){
     for(let channel of channelsList){
         channels +=  `
         <li class="col" draggable='true' id='${channel.id}'> 
-        <div class="over-top" style='display: none;'></div>
+        <div class="over-top"'><div class="over-top-target"></div></div>
         <div class="col-header">
             <img class="col-header-img" src='${channel.imgURL}'>
             <div class="col-header-timer"></div>

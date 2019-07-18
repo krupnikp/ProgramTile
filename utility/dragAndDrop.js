@@ -4,7 +4,7 @@ let catchedTargetLi = null;
 function handleDragStart(event) {
 
     draggableElement = event.target;  // or ... = this
-    this.style.opacity = '0.5'; 
+    this.style.opacity = '0.3'; 
 }
 
 function handleDragOver(event) {
@@ -14,13 +14,15 @@ function handleDragOver(event) {
     // catchedTargetLi = event.target.closest('li');
     // console.log( 'TOOOOO' ,event)
     // console.log(draggableElement.previousElementSibling.children[2], catchedTargetLi.children[2]) // ??????????
-    console.log(draggableElement.children[3])
-    if(event.target.closest('.over-bottom') && draggableElement.children[3] !== event.target.closest('.over-bottom')){
-        console.log('dziala')
-        event.target.closest('.over-bottom').style.height = '111px'; 
+    if (event.target.closest('.over-top') && draggableElement.children[0] !== event.target.closest('.over-top')) {
+        event.target.closest('.over-top').style.height = '111px';
+        event.target.closest('.over-top').firstChild.style.height = '200px'; 
+     
+    } else if(event.target.closest('.over-bottom') && draggableElement.children[3] !== event.target.closest('.over-bottom')) {
+        event.target.closest('.over-bottom').style.height = '111px';
+        event.target.closest('.over-bottom').firstChild.style.height = '200px';
     }
     
-
 
 
     // if (event.target.closest('.col-header') 
@@ -41,9 +43,14 @@ function handleDragOver(event) {
 function handleDragLeave(event) {
     event.preventDefault();
     catchedTargetLi = event.target.closest('li');
+    console.log('LEAVE', event.target.closest('li').children[0].children[0])
 
-    // catchedTargetLi.children[0].style.display = 'none';
+    catchedTargetLi.children[0].style.height = '0px';
+    catchedTargetLi.children[0].children[0].style.height = '100px'; 
+
     catchedTargetLi.children[3].style.height = '0px';
+    catchedTargetLi.children[3].children[0].style.height = '100px'; 
+  
 }
 
 function handleDragExit(event) {
@@ -56,15 +63,13 @@ function handleDragExit(event) {
 function handleDrop(event) {
     catchedTargetLi = event.target.closest('li');
    
-    
-    if (event.target.closest('.col-header')) {
+    if (event.target.closest('.over-top')) {
         catchedTargetLi.parentElement.insertBefore(draggableElement, catchedTargetLi)
-        catchedTargetLi.children[0].style.display = 'none';
-    } else if (event.target.closest('.col-text')) {
+        catchedTargetLi.children[0].style.height = '0px';
+    } else if (event.target.closest('.over-bottom')) {
         catchedTargetLi.parentElement.insertBefore(draggableElement, catchedTargetLi.nextElementSibling)
-        catchedTargetLi.children[3].style.display = 'none';
+        catchedTargetLi.children[3].style.height = '0px';
     }
-
 }
 
 
@@ -77,7 +82,7 @@ function handleDragEnd(event) {
 
 function dnd(el) {
     el.addEventListener('dragstart', handleDragStart, false);
-    el.addEventListener('dragover', handleDragOver, false);
+    el.addEventListener('dragenter', handleDragOver, false);
     el.addEventListener('dragleave', handleDragLeave, false);
     el.addEventListener('dragexit', handleDragExit, false);
     el.addEventListener('drop', handleDrop, false);
