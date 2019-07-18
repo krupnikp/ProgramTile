@@ -22,7 +22,7 @@ body {
     width: 246px;
     height: 111px;
     border: 2px dashed #000;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     overflow: hidden;
     animation: slide ease-out 0.5s forwards;
     opacity: 0.2;
@@ -34,7 +34,7 @@ body {
     width: 246px;
     height: 111px;
     border: 2px dashed #000;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     overflow: hidden;
     animation: slide ease-out 0.5s forwards;
     opacity: 0.2;
@@ -43,8 +43,7 @@ body {
     from {height: 0;}
     to {height: 111px;}
 }
-
-/* li * {pointer-events: none;} */
+.col-text * {pointer-events: none;}
 
 
 .col-header {
