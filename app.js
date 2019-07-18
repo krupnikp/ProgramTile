@@ -93,25 +93,25 @@ function channelRender(channelsList, dateConverter){
     for(let channel of channelsList){
         channels +=  `
         <li class="col" draggable='true' id='${channel.id}'> 
-        <div class="over-top"'><div class="over-top-target"></div></div>
-        <div class="col-header">
-            <img class="col-header-img" src='${channel.imgURL}'>
-            <div class="col-header-timer"></div>
-            <svg class="loader" width='100%' height='2'>
-                
-            </svg>
-        </div>
-        <div class="col-text">
-            <img class="col-text-img" src='${channel.imgURL}'>  
-            <div>
-                <h4 class="col-text-title">${channel.title}</h4>
-                <p class="col-text-channel">National geographic HD 
-                    <span class="col-channel-time">${dateConverter(channel.startTime)} - ${dateConverter(channel.endTime)} </span> 
-                </p>
-                <p class="col-text-category">${channel.category}</p>
+            <div class="over-top"'><div class="over-top-target"></div></div>
+            <div class="col-header">
+                <img class="col-header-img" src='${channel.imgURL}'>
+                <div class="col-header-timer"></div>
+                <svg class="loader" width='100%' height='2'>
+                    
+                </svg>
             </div>
-        </div>
-        <div class="over-bottom"><div class="over-bottom-target"></div></div>   
+            <div class="col-text">
+                <img class="col-text-img" src='${channel.imgURL}'>  
+                <div>
+                    <h4 class="col-text-title">${channel.title}</h4>
+                    <p class="col-text-channel">National geographic HD 
+                        <span class="col-channel-time">${dateConverter(channel.startTime)} - ${dateConverter(channel.endTime)} </span> 
+                    </p>
+                    <p class="col-text-category">${channel.category}</p>
+                </div>
+            </div>
+            <div class="over-bottom"><div class="over-bottom-target"></div></div>   
         </li>`;
     }
     return channels;

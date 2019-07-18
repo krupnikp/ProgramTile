@@ -8,11 +8,12 @@ body {
     font-size: 12px;
     font-family: 'Roboto', sans-serif;
     line-height: 1.6em;
+    padding: 50px;
 }
 
 .col {
     width: 250px;
-    margin: 40px;
+    margin: auto;
     list-style-type: none;
     position: relative;
 }
@@ -21,7 +22,7 @@ body {
     background: rgb(44, 44, 64);
     height: 150px;
     position: relative;
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
 .col-header::before {
@@ -88,11 +89,7 @@ body {
     background:silver;
     width: 100%;
     height: 0;
-    /* border: 2px dashed #000; */
-    /* margin-bottom: 20px; */
-    /* overflow: hidden; */
-    /* animation: slide ease-out 0.5s forwards; */
-    /* opacity: 0.2; */
+    transition: height 0.5s;
 }
 
 .over-top-target {
@@ -100,9 +97,9 @@ body {
     top:0;
     right: 0px;
     width: 100%;
-    height: 100px;
+    height: 80px;
     background: blue;
-    opacity: 0.4;
+    opacity: 0;
     z-index: 1;
 }
 
@@ -110,11 +107,11 @@ body {
     background:silver;
     width: 100%;
     height: 0;
+    transition: height 0.5s;
     /* border: 2px dashed #000; */
     /* margin-top: 20px; */
-    /* overflow: hidden; */
+    overflow: hidden;
     /* animation: slide ease-out 0.5s forwards; */
-    /* opacity: 0.2; */
 }
 
 .over-bottom-target {
@@ -122,9 +119,9 @@ body {
     bottom:0;
     right: 0px;
     width: 100%;
-    height: 100px;
+    height: 80px;
     background: red;
-    opacity: 0.4;
+    opacity: 0;
 }
 
 
