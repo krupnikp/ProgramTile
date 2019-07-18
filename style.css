@@ -14,37 +14,8 @@ body {
     width: 250px;
     margin: 40px;
     list-style-type: none;
+    position: relative;
 }
-
-.over-top {
-    display: none;
-    background:silver;
-    width: 246px;
-    height: 111px;
-    border: 2px dashed #000;
-    /* margin-bottom: 20px; */
-    overflow: hidden;
-    animation: slide ease-out 0.5s forwards;
-    opacity: 0.2;
-}
-
-.over-bottom {
-    display: none;
-    background:silver;
-    width: 246px;
-    height: 111px;
-    border: 2px dashed #000;
-    /* margin-top: 20px; */
-    overflow: hidden;
-    animation: slide ease-out 0.5s forwards;
-    opacity: 0.2;
-}
-@keyframes slide {
-    from {height: 0;}
-    to {height: 111px;}
-}
-.col-text * {pointer-events: none;}
-
 
 .col-header {
     background: rgb(44, 44, 64);
@@ -110,3 +81,43 @@ body {
 }
 
 
+
+.over-top {
+    display: none;
+    background:silver;
+    width: 246px;
+    height: 111px;
+    border: 2px dashed #000;
+    /* margin-bottom: 20px; */
+    overflow: hidden;
+    animation: slide ease-out 0.5s forwards;
+    opacity: 0.2;
+}
+
+.over-bottom {
+    background:silver;
+    width: 100%;
+    height: 0;
+    border: 2px dashed #000;
+    /* margin-top: 20px; */
+    /* overflow: hidden; */
+    /* animation: slide ease-out 0.5s forwards; */
+}
+
+.over-bottom-target {
+    position: absolute;
+    top:105px;
+    right: 0px;
+    width: 100%;
+    height: 105px;
+    background: red;
+    opacity: 0.5;
+}
+
+
+@keyframes slide {
+    from {height: 0;}
+    to {height: 111px;}
+}
+
+.over
