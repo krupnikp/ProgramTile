@@ -7,6 +7,9 @@ const sizeBottomViewShow = '211px';
 const dragBottomTargets =  document.getElementsByClassName('over-bottom-target');
 const dragTopTargets =  document.getElementsByClassName('over-top-target');
 
+let targetTop = null;
+let targetBottom = null;
+
 let draggableElement = null;
 let catchedTargetLi = null;
 
@@ -38,8 +41,8 @@ function handleDragStart(event) {
 
 function handleDragOver(event) {
     event.preventDefault();
-    const targetTop = event.target.closest('.over-top');
-    const targetBottom = event.target.closest('.over-bottom');
+    targetTop = event.target.closest('.over-top');
+    targetBottom = event.target.closest('.over-bottom');
     
     if (draggableElement !== this) {
         if (targetTop && draggableElement.querySelector('.over-top') !== targetTop){
@@ -55,8 +58,8 @@ function handleDragOver(event) {
 
 function handleDragLeave(event) {
     event.preventDefault();
-    const targetTop = this.querySelector('.over-top');
-    const targetBottom = this.querySelector('.over-bottom');
+    targetTop = this.querySelector('.over-top');
+    targetBottom = this.querySelector('.over-bottom');
 
     targetTop.style.height = '0px';
     targetTop.children[0].style.height = '80px'; 
@@ -69,8 +72,8 @@ function handleDragLeave(event) {
 function handleDrop(event) {
     catchedTargetLi = event.target.closest('li');
 
-    const targetTop = this.querySelector('.over-top');
-    const targetBottom = this.querySelector('.over-bottom');
+    targetTop = this.querySelector('.over-top');
+    targetBottom = this.querySelector('.over-bottom');
 
     if (event.target.closest('.over-top')) {
         catchedTargetLi.parentElement.insertBefore(draggableElement, catchedTargetLi)
