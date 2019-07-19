@@ -1,3 +1,8 @@
+:root {
+    --heightTarget: 80px;
+}
+
+
 * {
     margin: 0px;
     padding: 0px;
@@ -13,7 +18,7 @@ body {
 
 .col {
     width: 250px;
-    margin: auto;
+    margin: 0px auto;
     list-style-type: none;
     position: relative;
 }
@@ -22,7 +27,6 @@ body {
     background: rgb(44, 44, 64);
     height: 150px;
     position: relative;
-    /* pointer-events: none; */
 }
 
 .col-header::before {
@@ -34,7 +38,6 @@ body {
     right: 0;
     border-radius: 5px 5px 0 0;
     background: linear-gradient(to bottom, rgba(44,44,64,0), rgba(44,44,64,0.8));
-    /* pointer-events: none; */
 }
 .col-header-img {
     height: 100%;
@@ -83,8 +86,6 @@ body {
     color: rgba(255,255,255, 0.5);
 }
 
-
-
 .over-top {
     background:silver;
     width: 100%;
@@ -95,9 +96,10 @@ body {
 .over-top-target {
     position: absolute;
     top:0;
-    right: 0px;
+    right: 0;
     width: 100%;
-    height: 80px;
+    height: var(--heightTarget);
+    transition: height 0.5s;
     background: blue;
     opacity: 0;
     z-index: 1;
@@ -108,24 +110,16 @@ body {
     width: 100%;
     height: 0;
     transition: height 0.5s;
-    /* border: 2px dashed #000; */
-    /* margin-top: 20px; */
     overflow: hidden;
-    /* animation: slide ease-out 0.5s forwards; */
 }
 
 .over-bottom-target {
     position: absolute;
     bottom:0;
-    right: 0px;
+    right: 0;
     width: 100%;
-    height: 80px;
+    height: var(--heightTarget);
+    transition: height 0.5s;
     background: red;
     opacity: 0;
-}
-
-
-@keyframes slide {
-    from {height: 0;}
-    to {height: 111px;}
 }

@@ -1,64 +1,90 @@
+const sizeTopTargetShow = '300px';
+const sizeBottomTargetShow = '300px';
+
+const sizeTopViewShow = '211px';
+const sizeBottomViewShow = '211px';
+
+const dragBottomTargets =  document.getElementsByClassName('over-bottom-target');
+const dragTopTargets =  document.getElementsByClassName('over-top-target');
+
 let draggableElement = null;
 let catchedTargetLi = null;
 
-function handleDragStart(event) {
+function resetTargets() {
+    Array.from(dragBottomTargets).forEach(element => {
+       element.style.display = 'initial';
+    });
 
-    draggableElement = event.target;  // or ... = this
+    Array.from(dragTopTargets).forEach(element => {
+        element.style.display = 'initial';
+    });
+}
+
+function handleDragStart(event) {
+    resetTargets();
+    draggableElement = event.target;
+
+    const nextElement = draggableElement.nextElementSibling;
+    const previousElement = draggableElement.previousElementSibling
+
+    if (previousElement){
+        previousElement.querySelector('.over-bottom-target').style.display = 'none';
+    } 
+    if (nextElement){
+        nextElement.querySelector('.over-top-target').style.display = 'none';    
+    } 
     this.style.opacity = '0.3'; 
 }
 
 function handleDragOver(event) {
     event.preventDefault();
-    // const targetTop = event.target.closest('.col-header');
-    // const targetBottom = event.target.closest('.col-text');
-    catchedTargetLi = event.target.closest('li');
-    // console.log( 'TOOOOO' ,event)
-    // console.log(draggableElement.previousElementSibling.children[3], catchedTargetLi.previousElementSibling.children[3]) // ??????????
-    if ((event.target.closest('.over-top')) 
-    && (draggableElement.children[0] !== event.target.closest('.over-top')) 
-    // && (draggableElement.parentElement.children[3] !== this.children[3]) //?????????????????????????
-    ){
-        event.target.closest('.over-top').style.height = '111px';
-        event.target.closest('.over-top').firstChild.style.height = '200px'; 
-     
-    } else if(event.target.closest('.over-bottom') && draggableElement.children[3] !== event.target.closest('.over-bottom')) {
-        event.target.closest('.over-bottom').style.height = '111px';
-        event.target.closest('.over-bottom').firstChild.style.height = '200px';
+    const targetTop = event.target.closest('.over-top');
+    const targetBottom = event.target.closest('.over-bottom');
+    
+    if (draggableElement !== this) {
+        if (targetTop && draggableElement.querySelector('.over-top') !== targetTop){
+            targetTop.style.height = sizeTopViewShow;
+            targetTop.querySelector('.over-top-target').style.height = sizeTopTargetShow;
+         
+        } else if(targetBottom && draggableElement.querySelector('.over-bottom') !== targetBottom) {
+            targetBottom.style.height = sizeBottomViewShow;
+            targetBottom.querySelector('.over-bottom-target').style.height = sizeBottomTargetShow;
+        }
     }
 }
 
 function handleDragLeave(event) {
     event.preventDefault();
-    catchedTargetLi = event.target.closest('li');
-    // console.log('LEAVE', event.target.closest('li').children[0].children[0])
+    const targetTop = this.querySelector('.over-top');
+    const targetBottom = this.querySelector('.over-bottom');
 
-    catchedTargetLi.children[0].style.height = '0px';
-    catchedTargetLi.children[0].children[0].style.height = '80px'; 
+    targetTop.style.height = '0px';
+    targetTop.children[0].style.height = '80px'; 
 
-    catchedTargetLi.children[3].style.height = '0px';
-    catchedTargetLi.children[3].children[0].style.height = '80px'; 
+    targetBottom.style.height = '0px';
+    targetBottom.children[0].style.height = '80px'; 
   
 }
 
 function handleDrop(event) {
     catchedTargetLi = event.target.closest('li');
-   
+
+    const targetTop = this.querySelector('.over-top');
+    const targetBottom = this.querySelector('.over-bottom');
+
     if (event.target.closest('.over-top')) {
         catchedTargetLi.parentElement.insertBefore(draggableElement, catchedTargetLi)
-        catchedTargetLi.children[0].style.height = '0px';
-        catchedTargetLi.children[0].children[0].style.height = '80px'; 
+        targetTop.style.height = '0px';
+        targetTop.children[0].style.height = '80px'; 
     } else if (event.target.closest('.over-bottom')) {
         catchedTargetLi.parentElement.insertBefore(draggableElement, catchedTargetLi.nextElementSibling)
-        catchedTargetLi.children[3].style.height = '0px';
-        catchedTargetLi.children[3].children[0].style.height = '80px'; 
+        targetBottom.style.height = '0px';
+        targetBottom.children[0].style.height = '80px'; 
     }
 }
 
-
-function handleDragEnd(event) {
+function handleDragEnd() {
     this.style.opacity = '1'; 
-    
-    catchedTargetLi = event.target.closest('li');   
 }
 
 function dnd(el) {
