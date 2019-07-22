@@ -1,5 +1,7 @@
 const MINUTE = 60 * 1000;
 const TIME_NOW = Date.now();
+const OVER_BOTTOM_TARGET = 'over-bottom-target';
+const OVER_TOP_TARGET = 'over-top-target';
 const imageSource = 'http://lorempixel.com/250/150/abstract/';
 
 const channelsList = [{
@@ -72,13 +74,11 @@ const progressBar = (htmlEl, startTime, endTime) => {
         const totalTime = endTime - startTime;
         const pastTime = +new Date() - startTime;
         const pastPercent = Math.floor(pastTime / totalTime * 100);
-        // console.log (pastTime, totalTime, pastPercent)
 
         if (pastPercent > 100) {
             clearInterval(intervalId);
             htmlEl.innerHTML = '';
-        } else if (pastPercent >= 0) {
-            // htmlEl.style.width = pastPercent + '%';
+        } else {
             htmlEl.innerHTML =
                 `<rect class="loader" width='100%' height='100%' fill='white' /> 
             <rect class="loader-bar" width='${pastPercent + '%'}' height='100%' fill='red'>
@@ -89,12 +89,10 @@ const progressBar = (htmlEl, startTime, endTime) => {
 
 
 function channelRender(channelsList, dateConverter) {
-
-    let channels = '';
-    for (let channel of channelsList) {
-        channels += `
+    return channelsList.reduce((acc, channel) => {
+        return acc += `
         <li class="col" draggable='true' id='${channel.id}'> 
-            <div class="over-top"'><div class="over-top-target"></div></div>
+            <div class="over-top"'><div class="${OVER_TOP_TARGET}"></div></div>
             <div class="col-header">
                 <img class="col-header-img" src='${channel.imgURL}'>
                 <div class="col-header-timer"></div>
@@ -112,11 +110,9 @@ function channelRender(channelsList, dateConverter) {
                     <p class="col-text-category">${channel.category}</p>
                 </div>
             </div>
-            <div class="over-bottom"><div class="over-bottom-target"></div></div>   
+            <div class="over-bottom"><div class="${OVER_BOTTOM_TARGET}"></div></div>   
         </li>`;
-    }
-    
-    return channels;
+    }, '');
 };
 
 document.querySelector('.col-list').innerHTML = channelRender(channelsList, dateConverter);
@@ -130,5 +126,5 @@ document.querySelector('.col-list').innerHTML = channelRender(channelsList, date
 });
 
 [...document.getElementsByClassName('col')].forEach((el) => {
-    dnd(el)
+    dragAndDrop(el)
 });

@@ -39,7 +39,7 @@ function handleDragStart(event) {
     this.style.opacity = '0.3';
 }
 
-function handleDragOver(event) {
+function handleDragEnter(event) {
     event.preventDefault();
     targetTop = event.target.closest('.over-top');
     targetBottom = event.target.closest('.over-bottom');
@@ -90,9 +90,10 @@ function handleDragEnd() {
     this.style.opacity = '1';
 }
 
-function dnd(el) {
+function dragAndDrop(el) {
     el.addEventListener('dragstart', handleDragStart);
-    el.addEventListener('dragover', handleDragOver);
+    el.addEventListener('dragenter', handleDragEnter);
+    el.addEventListener('dragenter', handleDragEnter);
     el.addEventListener('dragleave', handleDragLeave);
     el.addEventListener('drop', handleDrop);
     el.addEventListener('dragend', handleDragEnd);
