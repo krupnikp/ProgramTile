@@ -1,44 +1,45 @@
 const MINUTE = 60 * 1000;
 const TIME_NOW = Date.now();
+const imageSource = 'http://lorempixel.com/250/150/abstract/';
 
 const channelsList = [{
     title: 'Megalotnisko w Dubaju',
     category: 'Serial dokumentalny',
-    imgURL: 'http://lorempixel.com/250/150/abstract/1',
-    startTime: TIME_NOW - (11*MINUTE),
-    endTime: TIME_NOW + (1*MINUTE),
+    imgURL: `${imageSource}1`,
+    startTime: TIME_NOW - (11 * MINUTE),
+    endTime: TIME_NOW + (1 * MINUTE),
     id: 1,
 },
 {
     title: 'Mega schronisko w Dubaju',
     category: 'Sport',
-    imgURL: 'http://lorempixel.com/250/150/abstract/2',
-    startTime: TIME_NOW + (1*MINUTE),
-    endTime: TIME_NOW + (2*MINUTE),
+    imgURL: `${imageSource}2`,
+    startTime: TIME_NOW + (1 * MINUTE),
+    endTime: TIME_NOW + (2 * MINUTE),
     id: 2,
 },
 {
     title: 'Megalotnisko w Dubaju',
     category: 'Serial dokumentalny',
-    imgURL: 'http://lorempixel.com/250/150/abstract/3',
-    startTime: TIME_NOW - (5*MINUTE),
-    endTime: TIME_NOW + (15*MINUTE),
+    imgURL: `${imageSource}3`,
+    startTime: TIME_NOW - (5 * MINUTE),
+    endTime: TIME_NOW + (15 * MINUTE),
     id: 3,
 },
 {
     title: 'Mega schronisko w Dubaju',
     category: 'Sport',
-    imgURL: 'http://lorempixel.com/250/150/abstract/4',
-    startTime: TIME_NOW - (20*MINUTE),
-    endTime: TIME_NOW + (61*MINUTE),
+    imgURL: `${imageSource}4`,
+    startTime: TIME_NOW - (20 * MINUTE),
+    endTime: TIME_NOW + (61 * MINUTE),
     id: 4,
 }];
 
 
 const programTimer = (htmlEl, startTime, endTime) => {
 
-    const timeToStart = startTime - Date.now() - 10*MINUTE;
-    const intervalId = setInterval(renderTimer, 1000)  
+    const timeToStart = startTime - Date.now() - 10 * MINUTE;
+    const intervalId = setInterval(renderTimer, 1000)
 
     renderTimer()
     setTimeout(intervalId, timeToStart);
@@ -53,13 +54,13 @@ const programTimer = (htmlEl, startTime, endTime) => {
             htmlEl.innerHTML = 'Trwa';
         } else {
             htmlEl.innerHTML = '';
-            clearInterval(intervalId);  
-        }    
-    }  
+            clearInterval(intervalId);
+        }
+    }
 };
 
 const progressBar = (htmlEl, startTime, endTime) => {
-    
+
     const timeStart = startTime - Date.now();
     const onePercenteTime = (endTime - startTime) / 100;
     const intervalId = setInterval(renderBar, onePercenteTime);
@@ -72,14 +73,14 @@ const progressBar = (htmlEl, startTime, endTime) => {
         const pastTime = +new Date() - startTime;
         const pastPercent = Math.floor(pastTime / totalTime * 100);
         // console.log (pastTime, totalTime, pastPercent)
-        
+
         if (pastPercent > 100) {
             clearInterval(intervalId);
             htmlEl.innerHTML = '';
-        } else if (pastPercent >= 0){
+        } else if (pastPercent >= 0) {
             // htmlEl.style.width = pastPercent + '%';
             htmlEl.innerHTML =
-            `<rect class="loader" width='100%' height='100%' fill='white' /> 
+                `<rect class="loader" width='100%' height='100%' fill='white' /> 
             <rect class="loader-bar" width='${pastPercent + '%'}' height='100%' fill='red'>
             </rect>`;
         }
@@ -87,18 +88,18 @@ const progressBar = (htmlEl, startTime, endTime) => {
 };
 
 
-function channelRender(channelsList, dateConverter){ 
+function channelRender(channelsList, dateConverter) {
 
     let channels = '';
-    for(let channel of channelsList){
-        channels +=  `
+    for (let channel of channelsList) {
+        channels += `
         <li class="col" draggable='true' id='${channel.id}'> 
             <div class="over-top"'><div class="over-top-target"></div></div>
             <div class="col-header">
                 <img class="col-header-img" src='${channel.imgURL}'>
                 <div class="col-header-timer"></div>
                 <svg class="loader" width='100%' height='2'>
-                    
+
                 </svg>
             </div>
             <div class="col-text">
@@ -114,6 +115,7 @@ function channelRender(channelsList, dateConverter){
             <div class="over-bottom"><div class="over-bottom-target"></div></div>   
         </li>`;
     }
+    
     return channels;
 };
 
@@ -127,6 +129,6 @@ document.querySelector('.col-list').innerHTML = channelRender(channelsList, date
     progressBar(el, channelsList[index].startTime, channelsList[index].endTime);
 });
 
-[...document.getElementsByClassName('col')].forEach((el) => { /// or get element by tag name
+[...document.getElementsByClassName('col')].forEach((el) => {
     dnd(el)
 });
