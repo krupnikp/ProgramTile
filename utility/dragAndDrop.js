@@ -4,8 +4,8 @@ const sizeBottomTargetShow = '300px';
 const sizeTopViewShow = '211px';
 const sizeBottomViewShow = '211px';
 
-const dragBottomTargets = document.getElementsByClassName('over-bottom-target');
-const dragTopTargets = document.getElementsByClassName('over-top-target');
+const dragBottomTargets = document.querySelector('.over-bottom-target');
+const dragTopTargets = document.querySelector('.over-top-target');
 
 let targetTop = null;
 let targetBottom = null;
@@ -16,18 +16,7 @@ let catchedTargetLi = null;
 let nextElement = null;
 let previousElemen = null;
 
-// function resetTargets() {
-//     Array.from(dragBottomTargets).forEach(element => {
-//         element.style.display = 'initial';
-//     });
-
-//     Array.from(dragTopTargets).forEach(element => {
-//         element.style.display = 'initial';
-//     });
-// }
-
 function handleDragStart(event) {
-    // resetTargets();
     draggableElement = event.target;
 
     nextElement = draggableElement.nextElementSibling;
@@ -54,19 +43,6 @@ function handleDragEnter(event) {
     targetTop = this.closest('.over-top');
     targetBottom = this.closest('.over-bottom');
 
-    // this.style.height = sizeTopViewShow
-    // this.style.height = 
-    // console.log(event,this,targetTop)
-    // if (this === targetTop.children[0]) {
-    //     targetTop.style.height = sizeTopViewShow;
-    // }
-
-    // targetTop.querySelector('.over-top-target').style.height = sizeTopTargetShow;
-
-    // targetBottom.style.height = sizeBottomViewShow;
-    // targetBottom.querySelector('.over-bottom-target').style.height = sizeBottomTargetShow;
-
-    // if (draggableElement !== this) {
     if (targetTop) {
         this.style.height = sizeTopViewShow;
         this.querySelector('.over-top-target').style.height = sizeTopTargetShow;
@@ -75,29 +51,21 @@ function handleDragEnter(event) {
         this.style.height = sizeBottomViewShow;
         this.querySelector('.over-bottom-target').style.height = sizeBottomTargetShow;
     }
-    // }
 }
 
 function handleDragLeave(event) {
     event.preventDefault();
-    // targetTop = event.target.closest('.over-top');
-    // targetBottom = this.closest('.over-bottom');
-    console.log('LEAVE', this)
 
     this.parentElement.style.height = '0px';
     this.style.height = '80px';
 
     this.parentElement.style.height = '0px';
     this.style.height = '80px';
-
 }
 
 function handleDrop(event) {
     event.preventDefault();
     catchedTargetLi = event.target.closest('li');
-    // targetTop = this.querySelector('.over-top');
-    // targetBottom = this.querySelector('.over-bottom');
-    console.log('DROP',event ,catchedTargetLi, draggableElement)
 
     if (event.target.closest('.over-top')) {
         catchedTargetLi.parentElement.insertBefore(draggableElement, catchedTargetLi)
@@ -111,7 +79,6 @@ function handleDrop(event) {
 }
 
 function handleDragEnd() {
-    console.log('END', draggableElement)
     this.style.opacity = '1';
     draggableElement.querySelector('.over-top-target').style.display = 'initial';
     draggableElement.querySelector('.over-bottom-target').style.display = 'initial';
