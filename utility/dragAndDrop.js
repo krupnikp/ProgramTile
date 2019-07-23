@@ -13,22 +13,28 @@ let targetBottom = null;
 let draggableElement = null;
 let catchedTargetLi = null;
 
-function resetTargets() {
-    Array.from(dragBottomTargets).forEach(element => {
-        element.style.display = 'initial';
-    });
+let nextElement = null;
+let previousElemen = null;
 
-    Array.from(dragTopTargets).forEach(element => {
-        element.style.display = 'initial';
-    });
-}
+// function resetTargets() {
+//     Array.from(dragBottomTargets).forEach(element => {
+//         element.style.display = 'initial';
+//     });
+
+//     Array.from(dragTopTargets).forEach(element => {
+//         element.style.display = 'initial';
+//     });
+// }
 
 function handleDragStart(event) {
-    resetTargets();
+    // resetTargets();
     draggableElement = event.target;
 
-    const nextElement = draggableElement.nextElementSibling;
-    const previousElement = draggableElement.previousElementSibling
+    nextElement = draggableElement.nextElementSibling;
+    previousElement = draggableElement.previousElementSibling
+
+    draggableElement.querySelector('.over-top-target').style.display = 'none';
+    draggableElement.querySelector('.over-bottom-target').style.display = 'none';
 
     if (previousElement) {
         previousElement.querySelector('.over-bottom-target').style.display = 'none';
@@ -39,41 +45,59 @@ function handleDragStart(event) {
     this.style.opacity = '0.3';
 }
 
+function handleDragOver(event){
+    event.preventDefault();
+}
+
 function handleDragEnter(event) {
     event.preventDefault();
-    targetTop = event.target.closest('.over-top');
-    targetBottom = event.target.closest('.over-bottom');
+    targetTop = this.closest('.over-top');
+    targetBottom = this.closest('.over-bottom');
 
-    if (draggableElement !== this) {
-        if (targetTop && draggableElement.querySelector('.over-top') !== targetTop) {
-            targetTop.style.height = sizeTopViewShow;
-            targetTop.querySelector('.over-top-target').style.height = sizeTopTargetShow;
+    // this.style.height = sizeTopViewShow
+    // this.style.height = 
+    // console.log(event,this,targetTop)
+    // if (this === targetTop.children[0]) {
+    //     targetTop.style.height = sizeTopViewShow;
+    // }
 
-        } else if (targetBottom && draggableElement.querySelector('.over-bottom') !== targetBottom) {
-            targetBottom.style.height = sizeBottomViewShow;
-            targetBottom.querySelector('.over-bottom-target').style.height = sizeBottomTargetShow;
-        }
+    // targetTop.querySelector('.over-top-target').style.height = sizeTopTargetShow;
+
+    // targetBottom.style.height = sizeBottomViewShow;
+    // targetBottom.querySelector('.over-bottom-target').style.height = sizeBottomTargetShow;
+
+    // if (draggableElement !== this) {
+    if (targetTop) {
+        this.style.height = sizeTopViewShow;
+        this.querySelector('.over-top-target').style.height = sizeTopTargetShow;
+
+    } else if (targetBottom) {
+        this.style.height = sizeBottomViewShow;
+        this.querySelector('.over-bottom-target').style.height = sizeBottomTargetShow;
     }
+    // }
 }
 
 function handleDragLeave(event) {
     event.preventDefault();
-    targetTop = this.querySelector('.over-top');
-    targetBottom = this.querySelector('.over-bottom');
+    // targetTop = event.target.closest('.over-top');
+    // targetBottom = this.closest('.over-bottom');
+    console.log('LEAVE', this)
 
-    targetTop.style.height = '0px';
-    targetTop.children[0].style.height = '80px';
+    this.parentElement.style.height = '0px';
+    this.style.height = '80px';
 
-    targetBottom.style.height = '0px';
-    targetBottom.children[0].style.height = '80px';
+    this.parentElement.style.height = '0px';
+    this.style.height = '80px';
 
 }
 
 function handleDrop(event) {
+    event.preventDefault();
     catchedTargetLi = event.target.closest('li');
-
-    targetTop = this.querySelector('.over-top');
-    targetBottom = this.querySelector('.over-bottom');
+    // targetTop = this.querySelector('.over-top');
+    // targetBottom = this.querySelector('.over-bottom');
+    console.log('DROP',event ,catchedTargetLi, draggableElement)
 
     if (event.target.closest('.over-top')) {
         catchedTargetLi.parentElement.insertBefore(draggableElement, catchedTargetLi)
@@ -87,14 +111,28 @@ function handleDrop(event) {
 }
 
 function handleDragEnd() {
+    console.log('END', draggableElement)
     this.style.opacity = '1';
+    draggableElement.querySelector('.over-top-target').style.display = 'initial';
+    draggableElement.querySelector('.over-bottom-target').style.display = 'initial';
+
+    if (previousElement) {
+        previousElement.querySelector('.over-bottom-target').style.display = 'initial';
+    }
+    if (nextElement) {
+        nextElement.querySelector('.over-top-target').style.display = 'initial';
+    }
 }
 
 function dragAndDrop(el) {
     el.addEventListener('dragstart', handleDragStart);
-    el.addEventListener('dragenter', handleDragEnter);
-    el.addEventListener('dragenter', handleDragEnter);
-    el.addEventListener('dragleave', handleDragLeave);
-    el.addEventListener('drop', handleDrop);
+    el.querySelector('.over-top-target').addEventListener('dragover', handleDragOver);
+    el.querySelector('.over-bottom-target').addEventListener('dragover', handleDragOver);
+    el.querySelector('.over-top').addEventListener('dragenter', handleDragEnter);
+    el.querySelector('.over-bottom').addEventListener('dragenter', handleDragEnter);
+    el.querySelector('.over-top-target').addEventListener('dragleave', handleDragLeave);
+    el.querySelector('.over-bottom-target').addEventListener('dragleave', handleDragLeave);
+    el.querySelector('.over-top-target').addEventListener('drop', handleDrop);
+    el.querySelector('.over-bottom-target').addEventListener('drop', handleDrop);
     el.addEventListener('dragend', handleDragEnd);
 }

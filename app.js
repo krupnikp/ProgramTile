@@ -78,7 +78,7 @@ const progressBar = (htmlEl, startTime, endTime) => {
         if (pastPercent > 100) {
             clearInterval(intervalId);
             htmlEl.innerHTML = '';
-        } else {
+        } else if (pastPercent >= 0) {
             htmlEl.innerHTML =
                 `<rect class="loader" width='100%' height='100%' fill='white' /> 
             <rect class="loader-bar" width='${pastPercent + '%'}' height='100%' fill='red'>
