@@ -62,9 +62,6 @@ body {
   position: absolute;
   bottom: 0;
 }
-.loader-bar {
-  position: absolute;
-}
 
 .col-text-img {
   width: 40px;
@@ -89,39 +86,82 @@ body {
   color: rgba(255, 255, 255, 0.5);
 }
 
-.over-top {
-  background: rgb(192, 192, 192);
+.over-top, 
+.over-bottom {
+  background: rgba(192, 192, 192, 0.3);
   width: 100%;
   height: 0;
   transition: height 0.5s;
 }
-
-.over-top-target {
+.over-top-target,
+.over-bottom-target {
   position: absolute;
-  top: 0;
   right: 0;
   width: 100%;
   height: var(--heightTarget);
   transition: height 0.5s;
-  background: rgb(52, 52, 158);
   opacity: 0;
   z-index: 1;
 }
 
-.over-bottom {
-  background: rgb(192, 192, 192);
-  width: 100%;
-  height: 0;
-  transition: height 0.5s;
+.over-top-target {
+  top: 0;
+  background: rgb(52, 52, 158);
 }
 
 .over-bottom-target {
-  position: absolute;
   bottom: 0;
-  right: 0;
-  width: 100%;
-  height: var(--heightTarget);
-  transition: height 0.5s;
   background: rgb(255, 0, 0);
-  opacity: 0;
+}
+
+.animationDropFail {
+  animation: shake 0.6s;
+}
+
+.animationDrop {
+  overflow: hidden;
+  animation: zoom 0.8s;
+  z-index: 2;
+}
+.animationDrop:after{
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -70%;
+  bottom: -50%;
+  left: -70%;
+  background: linear-gradient(to bottom, rgba(229, 172, 142, 0), rgba(255,255,255,0.8) 50%, rgba(229, 172, 142, 0));
+  transform: rotateZ(60deg) translate(-5px, 100px);
+  animation: sheen 0.6s forwards;
+}
+@keyframes sheen {
+  100% {
+    transform: rotateZ(60deg) translate(1em, -9em);
+  }
+}
+
+@keyframes zoom {
+  100% {
+    transform: scale(1)
+  } 50%{
+    transform: scale(1.3)
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
