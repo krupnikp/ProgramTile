@@ -36,12 +36,11 @@ body {
   top: 0;
   right: 0;
   border-radius: 5px 5px 0 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(44, 44, 64, 0),
-    rgba(44, 44, 64, 0.8)
-  );
+  background: linear-gradient(to bottom,
+      rgba(44, 44, 64, 0),
+      rgba(44, 44, 64, 0.8));
 }
+
 .col-header-img {
   height: 100%;
   width: 100%;
@@ -67,6 +66,7 @@ body {
   width: 40px;
   height: 40px;
 }
+
 .col-text {
   padding-top: 10px;
   background: rgb(44, 44, 64);
@@ -86,13 +86,14 @@ body {
   color: rgba(255, 255, 255, 0.5);
 }
 
-.over-top, 
+.over-top,
 .over-bottom {
   background: rgba(192, 192, 192, 0.3);
   width: 100%;
   height: 0;
   transition: height 0.5s;
 }
+
 .over-top-target,
 .over-bottom-target {
   position: absolute;
@@ -123,17 +124,19 @@ body {
   animation: zoom 0.8s;
   z-index: 2;
 }
-.animationDrop:after{
+
+.animationDrop:after {
   content: '';
   position: absolute;
   top: -50%;
   right: -70%;
   bottom: -50%;
   left: -70%;
-  background: linear-gradient(to bottom, rgba(229, 172, 142, 0), rgba(255,255,255,0.8) 50%, rgba(229, 172, 142, 0));
+  background: linear-gradient(to bottom, rgba(229, 172, 142, 0), rgba(255, 255, 255, 0.8) 50%, rgba(229, 172, 142, 0));
   transform: rotateZ(60deg) translate(-5px, 100px);
   animation: sheen 0.6s forwards;
 }
+
 @keyframes sheen {
   100% {
     transform: rotateZ(60deg) translate(1em, -9em);
@@ -143,30 +146,38 @@ body {
 @keyframes zoom {
   100% {
     transform: scale(1)
-  } 50%{
+  }
+
+  50% {
     transform: scale(1.3)
   }
 }
 
 @keyframes shake {
-  10%, 90% {
+
+  10%,
+  90% {
     transform: translate3d(-1px, 0, 0);
   }
-  
-  20%, 80% {
+
+  20%,
+  80% {
     transform: translate3d(2px, 0, 0);
   }
 
-  30%, 50%, 70% {
+  30%,
+  50%,
+  70% {
     transform: translate3d(-4px, 0, 0);
   }
 
-  40%, 60% {
+  40%,
+  60% {
     transform: translate3d(4px, 0, 0);
   }
 }
 
-#draggableCursor{
+#draggableCursor {
   position: absolute;
   border-radius: 5px 5px 0 0;
   top: 10;
@@ -175,70 +186,90 @@ body {
   height: 210px;
   background: rgba(255, 0, 0, 0);
   animation: color 10s infinite;
-  z-index: 999;
+  z-index: 1;
 }
 
-@keyframes color{
+@keyframes color {
   0% {
     box-shadow: 0 0 35px #d65c97;
   }
+
   5% {
     box-shadow: 0 0 35px #5cd666;
   }
+
   10% {
     box-shadow: 0 0 35px #a55cd6;
   }
+
   15.0% {
     box-shadow: 0 0 35px #5c7cd6;
   }
+
   20% {
     box-shadow: 0 0 35px #d65c7a;
   }
+
   25% {
     box-shadow: 0 0 35px #81d65c;
   }
+
   30.0% {
     box-shadow: 0 0 35px #835cd6;
   }
+
   35% {
     box-shadow: 0 0 35px #685cd6;
   }
+
   40% {
     box-shadow: 0 0 35px #5c9dd6;
   }
+
   45% {
     box-shadow: 0 0 35px #5cd670;
   }
+
   50% {
     box-shadow: 0 0 35px #d6625c;
   }
+
   55.0% {
     box-shadow: 0 0 35px #d6835c;
   }
+
   60.0% {
     box-shadow: 0 0 35px #d6605c;
   }
+
   65% {
     box-shadow: 0 0 35px #be5cd6;
   }
+
   70% {
     box-shadow: 0 0 35px #5c8dd6;
   }
+
   75% {
     box-shadow: 0 0 35px #95d65c;
   }
+
   80% {
     box-shadow: 0 0 35px #d69d5c;
   }
+
   85.0% {
     box-shadow: 0 0 35px #d65c81;
   }
+
   90% {
     box-shadow: 0 0 35px #5cd666;
   }
+
   95% {
     box-shadow: 0 0 35px #d67e5c;
   }
+
   100% {
     box-shadow: 0 0 35px #64d65c;
   }

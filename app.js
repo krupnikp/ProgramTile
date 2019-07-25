@@ -1,43 +1,3 @@
-const MINUTE = 60 * 1000;
-const TIME_NOW = Date.now();
-const OVER_BOTTOM_TARGET = 'over-bottom-target';
-const OVER_TOP_TARGET = 'over-top-target';
-const imageSource = 'http://lorempixel.com/250/150/abstract/';
-
-const channelsList = [{
-    title: 'Megalotnisko w Dubaju',
-    category: 'Serial dokumentalny',
-    imgURL: `${imageSource}1`,
-    startTime: TIME_NOW - (11 * MINUTE),
-    endTime: TIME_NOW + (1 * MINUTE),
-    id: 1,
-},
-{
-    title: 'Mega schronisko w Dubaju',
-    category: 'Sport',
-    imgURL: `${imageSource}2`,
-    startTime: TIME_NOW + (1 * MINUTE),
-    endTime: TIME_NOW + (2 * MINUTE),
-    id: 2,
-},
-{
-    title: 'Megalotnisko w Dubaju',
-    category: 'Serial dokumentalny',
-    imgURL: `${imageSource}3`,
-    startTime: TIME_NOW - (5 * MINUTE),
-    endTime: TIME_NOW + (15 * MINUTE),
-    id: 3,
-},
-{
-    title: 'Mega schronisko w Dubaju',
-    category: 'Sport',
-    imgURL: `${imageSource}4`,
-    startTime: TIME_NOW - (20 * MINUTE),
-    endTime: TIME_NOW + (61 * MINUTE),
-    id: 4,
-}];
-
-
 const programTimer = (htmlEl, startTime, endTime) => {
 
     const timeToStart = startTime - Date.now() - 10 * MINUTE;
@@ -49,7 +9,7 @@ const programTimer = (htmlEl, startTime, endTime) => {
     function renderTimer() {
         const timeNow = Date.now();
         const distanceInMinutes = Math.ceil((startTime - timeNow) / MINUTE);
-        // console.log(endTime - timeNow)
+
         if (distanceInMinutes >= 1) {
             htmlEl.innerHTML = `Start za ${distanceInMinutes} min`;
         } else if (endTime >= timeNow) {
@@ -92,7 +52,7 @@ function channelRender(channelsList, dateConverter) {
     return channelsList.reduce((acc, channel) => {
         return acc += `
         <li class="col" draggable='true' id='${channel.id}'> 
-            <div class="over-top"'><div class="${OVER_TOP_TARGET}"></div></div>
+            <div class="over-top"'><div class="${SELECTORS.OVER_TOP_TARGET}"></div></div>
             <div class="col-header">
                 <img class="col-header-img" src='${channel.imgURL}'>
                 <div class="col-header-timer"></div>
@@ -110,7 +70,7 @@ function channelRender(channelsList, dateConverter) {
                     <p class="col-text-category">${channel.category}</p>
                 </div>
             </div>
-            <div class="over-bottom"><div class="${OVER_BOTTOM_TARGET}"></div></div>   
+            <div class="over-bottom"><div class="${SELECTORS.OVER_BOTTOM_TARGET}"></div></div>   
         </li>`;
     }, '');
 };
