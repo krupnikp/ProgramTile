@@ -8,6 +8,7 @@ const sizeViewInitial = '0px';
 
 const dragBottomTargets = document.querySelector('.over-bottom-target');
 const dragTopTargets = document.querySelector('.over-top-target');
+const draggableCursor = document.getElementById('draggableCursor');
 
 let targetTop = null;
 let targetBottom = null;
@@ -31,6 +32,12 @@ function handleDragStart(event) {
 
     closestTargetHide(previousElement, nextElement)
     this.style.opacity = '0.3';
+}
+function handleDragCursor(event){
+    console.log(event)
+
+    draggableCursor.style.top = event.clientY + 'px';
+    draggableCursor.style.left = event.clientX + 'px';
 }
 
 function handleDragOver(event) {
@@ -117,3 +124,5 @@ function dragAndDrop(el) {
     el.querySelector('.over-bottom-target').addEventListener('drop', handleDrop);
     el.addEventListener('dragend', handleDragEnd);
 }
+
+document.body.addEventListener('dragover', handleDragCursor);
