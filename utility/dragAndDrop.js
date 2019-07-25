@@ -20,9 +20,15 @@ let catchedTargetLi = null;
 let nextElement = null;
 let previousElement = null;
 
+let offsetX = null;
+let offsetY = null;
+
 function handleDragStart(event) {
     dropFailed = true;
     draggableElement = event.target;
+    
+    offsetX = event.offsetX;
+    offsetY = event.offsetY;
 
     nextElement = draggableElement.nextElementSibling;
     previousElement = draggableElement.previousElementSibling
@@ -30,14 +36,15 @@ function handleDragStart(event) {
     draggableElement.querySelector('.over-top-target').style.display = 'none';
     draggableElement.querySelector('.over-bottom-target').style.display = 'none';
 
+    draggableCursor.style.display = '';
+
     closestTargetHide(previousElement, nextElement)
     this.style.opacity = '0.3';
 }
 function handleDragCursor(event){
-    console.log(event)
 
-    draggableCursor.style.top = event.clientY + 'px';
-    draggableCursor.style.left = event.clientX + 'px';
+    draggableCursor.style.top = (event.clientY - offsetY +1)+ 'px';
+    draggableCursor.style.left = (event.clientX - offsetX +1)+ 'px';
 }
 
 function handleDragOver(event) {
@@ -92,6 +99,8 @@ function handleDragEnd() {
     this.style.opacity = '1';
     draggableElement.querySelector('.over-top-target').style.display = 'initial';
     draggableElement.querySelector('.over-bottom-target').style.display = 'initial';
+
+    draggableCursor.style.display = 'none';
 
     closestTargetHide(previousElement, nextElement)
 }

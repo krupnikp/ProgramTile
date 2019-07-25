@@ -168,11 +168,78 @@ body {
 
 #draggableCursor{
   position: absolute;
-  top: 0;
-  left: 0;
+  border-radius: 5px 5px 0 0;
+  top: 10;
+  left: 10;
   width: 250px;
-  height: 211px;
-  background: red;
+  height: 210px;
+  background: rgba(255, 0, 0, 0);
+  animation: color 10s infinite;
+  z-index: 999;
 }
 
-@keyframes
+@keyframes color{
+  0% {
+    box-shadow: 0 0 35px #d65c97;
+  }
+  5% {
+    box-shadow: 0 0 35px #5cd666;
+  }
+  10% {
+    box-shadow: 0 0 35px #a55cd6;
+  }
+  15.0% {
+    box-shadow: 0 0 35px #5c7cd6;
+  }
+  20% {
+    box-shadow: 0 0 35px #d65c7a;
+  }
+  25% {
+    box-shadow: 0 0 35px #81d65c;
+  }
+  30.0% {
+    box-shadow: 0 0 35px #835cd6;
+  }
+  35% {
+    box-shadow: 0 0 35px #685cd6;
+  }
+  40% {
+    box-shadow: 0 0 35px #5c9dd6;
+  }
+  45% {
+    box-shadow: 0 0 35px #5cd670;
+  }
+  50% {
+    box-shadow: 0 0 35px #d6625c;
+  }
+  55.0% {
+    box-shadow: 0 0 35px #d6835c;
+  }
+  60.0% {
+    box-shadow: 0 0 35px #d6605c;
+  }
+  65% {
+    box-shadow: 0 0 35px #be5cd6;
+  }
+  70% {
+    box-shadow: 0 0 35px #5c8dd6;
+  }
+  75% {
+    box-shadow: 0 0 35px #95d65c;
+  }
+  80% {
+    box-shadow: 0 0 35px #d69d5c;
+  }
+  85.0% {
+    box-shadow: 0 0 35px #d65c81;
+  }
+  90% {
+    box-shadow: 0 0 35px #5cd666;
+  }
+  95% {
+    box-shadow: 0 0 35px #d67e5c;
+  }
+  100% {
+    box-shadow: 0 0 35px #64d65c;
+  }
+}
