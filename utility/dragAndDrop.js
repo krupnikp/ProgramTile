@@ -31,7 +31,7 @@ function handleDragStart(event) {
     offsetY = event.offsetY;
 
     nextElement = draggableElement.nextElementSibling;
-    previousElement = draggableElement.previousElementSibling
+    previousElement = draggableElement.previousElementSibling;
 
     draggableElement.querySelector(`.${SELECTORS.OVER_TOP_TARGET}`).style.display = 'none';
     draggableElement.querySelector(`.${SELECTORS.OVER_BOTTOM_TARGET}`).style.display = 'none';

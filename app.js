@@ -1,10 +1,15 @@
 const programTimer = (htmlEl, startTime, endTime) => {
 
     const timeToStart = startTime - Date.now() - 10 * MINUTE;
-    const intervalId = setInterval(renderTimer, 1000)
 
-    renderTimer()
-    setTimeout(intervalId, timeToStart);
+    let intervalId;
+
+    function renderInterval() {
+        intervalId = setInterval(renderTimer, 1000);
+    }
+
+    renderTimer();
+    setTimeout(renderInterval, timeToStart);
 
     function renderTimer() {
         const timeNow = Date.now();
@@ -25,10 +30,14 @@ const progressBar = (htmlEl, startTime, endTime) => {
 
     const timeStart = startTime - Date.now();
     const onePercenteTime = (endTime - startTime) / 100;
-    const intervalId = setInterval(renderBar, onePercenteTime);
+    let intervalId;
+
+    function renderInterval() {
+        intervalId = setInterval(renderBar, onePercenteTime)
+    }
 
     renderBar();
-    setTimeout(intervalId, timeStart);
+    setTimeout(renderInterval, timeStart);
 
     function renderBar() {
         const totalTime = endTime - startTime;
@@ -39,10 +48,10 @@ const progressBar = (htmlEl, startTime, endTime) => {
             clearInterval(intervalId);
             htmlEl.innerHTML = '';
         } else if (pastPercent >= 0) {
-            htmlEl.innerHTML =
-                `<rect class="loader" width='100%' height='100%' fill='white' /> 
-            <rect class="loader-bar" width='${pastPercent + '%'}' height='100%' fill='red'>
-            </rect>`;
+            if (htmlEl.style.display = 'none') {
+                htmlEl.style.display = 'initial';
+            }
+            htmlEl.children[1].style.width = pastPercent + '%';
         }
     }
 };
@@ -56,8 +65,9 @@ function channelRender(channelsList, dateConverter) {
             <div class="col-header">
                 <img class="col-header-img" src='${channel.imgURL}'>
                 <div class="col-header-timer"></div>
-                <svg class="loader" width='100%' height='2'>
-
+                <svg class="loader" width='100%' height='2' display='none'>
+                    <rect class="" width='100%' height='100%' fill='white'></rect> 
+                    <rect class="loader-bar" width='0%' height='100%' fill='red'></rect>
                 </svg>
             </div>
             <div class="col-text">

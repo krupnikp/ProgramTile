@@ -37,7 +37,7 @@ const channelsList = [{
         category: 'Sport',
         imgURL: `${imageSource}4`,
         startTime: TIME_NOW - (20 * MINUTE),
-        endTime: TIME_NOW + (61 * MINUTE),
+        endTime: TIME_NOW + (12 * MINUTE),
         id: 4,
     }
 ];
