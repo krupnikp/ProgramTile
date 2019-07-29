@@ -28,8 +28,8 @@ const channelsList = [{
         title: 'Megalotnisko w Dubaju',
         category: 'Serial dokumentalny',
         imgURL: `${imageSource}3`,
-        startTime: TIME_NOW - (5 * MINUTE),
-        endTime: TIME_NOW + (15 * MINUTE),
+        startTime: TIME_NOW + (15 * MINUTE),
+        endTime: TIME_NOW + (5 * MINUTE),
         id: 3,
     },
     {

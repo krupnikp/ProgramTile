@@ -15,9 +15,9 @@ const programTimer = (htmlEl, startTime, endTime) => {
         const timeNow = Date.now();
         const distanceInMinutes = Math.ceil((startTime - timeNow) / MINUTE);
 
-        if (distanceInMinutes >= 1) {
+        if (distanceInMinutes >= 1 && distanceInMinutes <= 10) {
             htmlEl.innerHTML = `Start za ${distanceInMinutes} min`;
-        } else if (endTime >= timeNow) {
+        } else if (endTime >= timeNow && distanceInMinutes <= 10) {
             htmlEl.innerHTML = 'Trwa';
         } else {
             htmlEl.innerHTML = '';
@@ -96,5 +96,5 @@ document.querySelector('.col-list').innerHTML = channelRender(channelsList, date
 });
 
 [...document.getElementsByClassName('col')].forEach((el) => {
-    dragAndDrop(el)
+    initDragAndDrop(el)
 });

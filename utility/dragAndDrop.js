@@ -2,13 +2,13 @@ const sizeTopTargetShow = '300px';
 const sizeBottomTargetShow = '300px';
 const sizeTargetInitial = '80px';
 
-const sizeTopViewShow = '211px';
-const sizeBottomViewShow = '211px';
 const sizeViewInitial = '0px';
 
 const dragBottomTargets = document.querySelector(`.${SELECTORS.OVER_BOTTOM_TARGET}`);
 const dragTopTargets = document.querySelector(`.${SELECTORS.OVER_TOP_TARGET}`);
 const draggableCursor = document.getElementById('draggableCursor');
+
+let sizeViewShow = null;
 
 let targetTop = null;
 let targetBottom = null;
@@ -27,16 +27,17 @@ function handleDragStart(event) {
     dropFailed = true;
     draggableElement = event.target;
 
+    sizeViewShow = event.srcElement.clientHeight;
     offsetX = event.offsetX;
     offsetY = event.offsetY;
 
     nextElement = draggableElement.nextElementSibling;
     previousElement = draggableElement.previousElementSibling;
 
-    draggableElement.querySelector(`.${SELECTORS.OVER_TOP_TARGET}`).style.display = 'none';
-    draggableElement.querySelector(`.${SELECTORS.OVER_BOTTOM_TARGET}`).style.display = 'none';
+    draggableElement.querySelector(`.${SELECTORS.OVER_TOP_TARGET}`).classList.add('hidden');
+    draggableElement.querySelector(`.${SELECTORS.OVER_BOTTOM_TARGET}`).classList.add('hidden');
 
-    draggableCursor.style.display = '';
+    draggableCursor.classList.remove('hidden');
 
     closestTargetHide(previousElement, nextElement)
     this.style.opacity = '0.3';
@@ -58,11 +59,11 @@ function handleDragEnter(event) {
     targetBottom = this.closest('.over-bottom');
 
     if (targetTop) {
-        this.style.height = sizeTopViewShow;
+        this.style.height = sizeViewShow + 'px';
         this.querySelector(`.${SELECTORS.OVER_TOP_TARGET}`).style.height = sizeTopTargetShow;
 
     } else if (targetBottom) {
-        this.style.height = sizeBottomViewShow;
+        this.style.height = sizeViewShow + 'px';
         this.querySelector(`.${SELECTORS.OVER_BOTTOM_TARGET}`).style.height = sizeBottomTargetShow;
     }
 }
@@ -98,10 +99,10 @@ function handleDragEnd() {
         removeClass('animationDropFail', 600)
     }
     this.style.opacity = '1';
-    draggableElement.querySelector(`.${SELECTORS.OVER_TOP_TARGET}`).style.display = 'initial';
-    draggableElement.querySelector(`.${SELECTORS.OVER_BOTTOM_TARGET}`).style.display = 'initial';
+    draggableElement.querySelector(`.${SELECTORS.OVER_TOP_TARGET}`).classList.remove('hidden');
+    draggableElement.querySelector(`.${SELECTORS.OVER_BOTTOM_TARGET}`).classList.remove('hidden');
 
-    draggableCursor.style.display = 'none';
+    draggableCursor.classList.add('hidden');
 
     closestTargetHide(previousElement, nextElement)
 }
@@ -113,16 +114,16 @@ function removeClass(className, timeout) {
 function closestTargetHide(previousElement, nextElement) {
     if (previousElement) {
         const prevElBottomTarget = previousElement.querySelector(`.${SELECTORS.OVER_BOTTOM_TARGET}`)
-        prevElBottomTarget.style.display = prevElBottomTarget.style.display === 'none' ? 'initial' : 'none';
+        prevElBottomTarget.classList.contains('hidden') ? prevElBottomTarget.classList.remove('hidden') : prevElBottomTarget.classList.add('hidden');
     }
     if (nextElement) {
         const prevElTopTarget = nextElement.querySelector(`.${SELECTORS.OVER_TOP_TARGET}`)
-        prevElTopTarget.style.display = prevElTopTarget.style.display === 'none' ? 'initial' : 'none';
+        prevElTopTarget.classList.contains('hidden') ? prevElTopTarget.classList.remove('hidden') : prevElTopTarget.classList.add('hidden');
     }
 }
 
 
-function dragAndDrop(el) {
+function initDragAndDrop(el) {
     el.addEventListener('dragstart', handleDragStart);
     el.querySelector(`.${SELECTORS.OVER_TOP_TARGET}`).addEventListener('dragover', handleDragOver);
     el.querySelector(`.${SELECTORS.OVER_BOTTOM_TARGET}`).addEventListener('dragover', handleDragOver);

@@ -1,5 +1,6 @@
 :root {
   --heightTarget: 80px;
+  --mainColorBackground: rgb(44, 44, 64); 
 }
 
 * {
@@ -15,6 +16,10 @@ body {
   padding: 50px;
 }
 
+.hidden {
+  display: none;
+}
+
 .col {
   width: 250px;
   margin: 0px auto;
@@ -23,7 +28,7 @@ body {
 }
 
 .col-header {
-  background: rgb(44, 44, 64);
+  background: var(--mainColorBackground);
   height: 150px;
   position: relative;
 }
@@ -51,7 +56,7 @@ body {
   position: absolute;
   bottom: 10px;
   border-radius: 3px;
-  background: rgb(44, 44, 64);
+  background: var(--mainColorBackground);
   color: rgba(255, 255, 255, 0.5);
   padding: 0 6px;
   margin-left: 5px;
@@ -69,7 +74,7 @@ body {
 
 .col-text {
   padding-top: 10px;
-  background: rgb(44, 44, 64);
+  background: var(--mainColorBackground);
   display: flex;
   justify-content: space-between;
 }
@@ -186,7 +191,7 @@ body {
   height: 210px;
   background: rgba(255, 0, 0, 0);
   animation: color 10s infinite;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 @keyframes color {
