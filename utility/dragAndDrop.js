@@ -23,6 +23,7 @@ let previousElement = null;
 let offsetX = null;
 let offsetY = null;
 
+
 function handleDragStart(event) {
     dropFailed = true;
     draggableElement = event.target;
