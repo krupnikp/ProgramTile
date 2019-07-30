@@ -95,6 +95,10 @@ document.querySelector('.col-list').innerHTML = channelRender(channelsList, date
     progressBar(el, channelsList[index].startTime, channelsList[index].endTime);
 });
 
+const dnd = new DnD();
+
 [...document.getElementsByClassName('col')].forEach((el) => {
-    initDragAndDrop(el)
+    dnd.initDragAndDrop(el)
 });
+
+dnd.initDragCursor();
