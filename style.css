@@ -65,6 +65,7 @@ body {
 .loader {
   position: absolute;
   bottom: 0;
+  left: 0;
 }
 
 .col-text-img {

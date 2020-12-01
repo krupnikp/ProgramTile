@@ -21,15 +21,15 @@ const channelsList = [{
         category: 'Sport',
         imgURL: `${imageSource}2`,
         startTime: TIME_NOW + (1 * MINUTE),
-        endTime: TIME_NOW + (2 * MINUTE),
+        endTime: TIME_NOW + (3 * MINUTE),
         id: 2,
     },
     {
         title: 'Megalotnisko w Dubaju',
         category: 'Serial dokumentalny',
         imgURL: `${imageSource}3`,
-        startTime: TIME_NOW + (15 * MINUTE),
-        endTime: TIME_NOW + (5 * MINUTE),
+        startTime: TIME_NOW + (11 * MINUTE),
+        endTime: TIME_NOW + (35 * MINUTE),
         id: 3,
     },
     {
